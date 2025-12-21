@@ -1,214 +1,576 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion } = require('@whiskeysockets/baileys');
 const pino = require('pino');
+const qrcode = require('qrcode-terminal');
 const fs = require('fs');
 
-// 🎯 ACTIONS ULTRA COMPLÈTES
+// 🎯 80 ACTIONS ÉPIQUES PAR NIVEAU
 const defis = {
     facile: [
-        "Envoie un vocal en chantant 'Joyeux anniversaire' 🎤",
-        "Change ta photo de profil en selfie bizarre pendant 1h 📸",
-        "Envoie 'Je t'aime' à 3 contacts random et screenshot ❤️",
-        "Raconte ta pire blague au groupe 😂",
-        "Fais 20 pompes et filme-toi 💪",
-        "Imite un animal pendant 30 secondes en vocal 🐶",
-        "Parle en verlan pendant les 5 prochains messages",
-        "Envoie un compliment unique à chaque membre du groupe 💝",
-        "Danse pendant 1 minute et partage la vidéo 🕺",
-        "Fais 30 squats sans pause 🏋️",
-        "Selfie avec la grimace la plus laide possible",
-        "Chante une chanson en inventant les paroles",
-        "Parle avec un accent bizarre pendant 10 minutes",
-        "Envoie une photo de ton écran d'accueil",
-        "Raconte un mensonge et on doit deviner si c'est vrai ou faux"
+        "Envoie un vocal en chantant comme une star 🎤",
+        "Change ta photo de profil en photo bébé 3h 👶",
+        "Envoie 'Je t'aime' à 5 contacts random et screenshot ❤️",
+        "Raconte la blague la plus nulle 😂",
+        "Fais 25 pompes et filme 💪",
+        "Imite 3 animaux en vocal 🐶",
+        "Parle en verlan 10 messages",
+        "Complimente CHAQUE membre 💝",
+        "Danse 1 minute et filme 🕺",
+        "Fais 40 squats 🏋️",
+        "Selfie grimace horrible 📸",
+        "Chante en inventant paroles 🎵",
+        "Accent étranger 15min 🗣️",
+        "Screenshot écran d'accueil",
+        "Raconte mensonge énorme",
+        "Poste story bizarre 10min",
+        "Vocal en chuchotant 30sec",
+        "Compte jusqu'à 50 en vocal rapide",
+        "Fais 30 jumping jacks",
+        "Envoie emoji aléatoire à 10 personnes",
+        "Écris message à l'envers complet",
+        "Parle comme un bébé 5 messages",
+        "Imite quelqu'un du groupe en vocal",
+        "Fais la planche 1 minute",
+        "Envoie photo de ton dernier repas",
+        "Raconte ton rêve le plus bizarre",
+        "Chante l'hymne national en entier",
+        "Fais 20 burpees",
+        "Vocal en criant pendant 10 secondes",
+        "Change statut en phrase ridicule 2h",
+        "Envoie meme le plus nul",
+        "Parle en rimes pendant 5 messages",
+        "Fais la roue et filme",
+        "Compte à rebours de 30 en vocal",
+        "Envoie photo de tes chaussures",
+        "Raconte histoire d'horreur en 1min",
+        "Fais 15 pompes en diamant",
+        "Vocal en beatbox 20 secondes",
+        "Change nom WhatsApp en truc bizarre 1h",
+        "Envoie ta citation préférée",
+        "Fais des jumping jacks pendant vocal",
+        "Raconte blague de papa",
+        "Prends photo avec animal/plante",
+        "Compte les membres du groupe en chantant",
+        "Fais 25 squats avec livre sur la tête",
+        "Vocal accent de ta région exagéré",
+        "Envoie screenshot notifications",
+        "Raconte souvenir embarrassant école",
+        "Fais pompes en applaudissant entre",
+        "Chante chanson Disney",
+        "Envoie photo objet rouge autour de toi",
+        "Parle comme un pirate 5 messages",
+        "Fais exercice yoga bizarre et filme",
+        "Vocal en parlant super lentement",
+        "Envoie emoji qui te représente et explique",
+        "Raconte comment tu as connu meilleur ami",
+        "Fais 30 mountain climbers",
+        "Change photo profil en dessin moche 2h",
+        "Vocal en rappant",
+        "Envoie photo de ton reflet",
+        "Compte de 100 à 0 par 7",
+        "Fais danse TikTok et filme",
+        "Parle en langage soutenu 10 messages",
+        "Envoie screenshot musique préférée",
+        "Raconte joke en anglais",
+        "Fais 20 squats sautés",
+        "Vocal en chantant opéra",
+        "Envoie photo ciel maintenant",
+        "Raconte ton moment le plus gênant",
+        "Fais planche latérale 30 sec chaque côté",
+        "Change bio en phrase motivante 24h",
+        "Vocal en imitant célébrité",
+        "Envoie photo première chose à ta gauche",
+        "Raconte rêve que tu veux réaliser",
+        "Fais 15 triceps dips",
+        "Parle comme robot 5 messages",
+        "Envoie screenshot dernier film regardé",
+        "Compte en espagnol jusqu'à 20",
+        "Fais high knees 1 minute",
+        "Vocal chanson d'enfance",
+        "Envoie photo ton espace de travail"
     ],
+    
     moyen: [
-        "Appelle ton crush et dis 'Je pense fort à toi' puis raccroche 📞",
-        "Poste une story Instagram embarrassante pendant 2h 📱",
-        "Envoie 'Tu me manques énormément' à ton ex 💔",
-        "Karaoké sur une chanson random et envoie la vidéo 🎤",
-        "Mange une cuillère de quelque chose de dégueu (moutarde, sauce piquante...) 🥵",
-        "Laisse quelqu'un du groupe écrire ton statut WhatsApp pour 24h",
-        "Envoie un vocal de 2 minutes en accent étranger 🗣️",
-        "Fais le poirier contre un mur pendant 1 minute 🤸",
-        "Supprime ton app préférée pour 24h 📵",
-        "Parle sans utiliser la lettre 'E' pendant 15 minutes",
-        "Envoie 'On doit parler sérieusement' à 5 contacts sans expliquer 😰",
-        "Appelle quelqu'un et parle comme un robot pendant 3 minutes 🤖",
-        "Change ton nom WhatsApp en ce que le groupe décide pour 2 jours",
-        "Envoie un vocal où tu racontes ton rêve le plus bizarre",
-        "Fais 50 jumping jacks et filme les 20 derniers"
+        "Appelle ton crush et dis 'je pense à toi' puis raccroche 📞",
+        "Poste story embarrassante sur Insta 2h 📱",
+        "Envoie 'tu me manques énormément' à ton ex 💔",
+        "Karaoké sur chanson random et filme 🎤",
+        "Mange cuillère de sauce très piquante 🥵",
+        "Laisse quelqu'un écrire ton statut 24h",
+        "Vocal 2min en accent étranger 🗣️",
+        "Fais poirier contre mur 1min 🤸",
+        "Supprime ton app préférée 24h 📵",
+        "Parle sans lettre 'E' pendant 15min",
+        "Envoie 'on doit parler sérieusement' à 5 contacts 😰",
+        "Appelle quelqu'un et parle en robot 3min 🤖",
+        "Change nom WhatsApp choisi par groupe 2 jours",
+        "Vocal racontant rêve le plus bizarre",
+        "Fais 50 jumping jacks et filme derniers 20",
+        "Laisse groupe lire tes 5 derniers messages privés",
+        "Poste photo moche de toi sur story 3h",
+        "Appelle parents et parle en langue inventée 1min",
+        "Mange combinaison bizarre choisie par groupe",
+        "Envoie message vocal à tous tes contacts 'Salut'",
+        "Change toutes tes photos profil réseaux 12h",
+        "Appelle ex et dis que tu as rêvé de lui/elle",
+        "Fais 100 squats en 5 minutes",
+        "Laisse quelqu'un poster sur ton Insta story",
+        "Envoie vocal où tu cries pendant 30 sec",
+        "Bloque ton crush pendant 1h sans expliquer",
+        "Poste 'Je suis célibataire' même si faux",
+        "Mange citron entier et filme réaction",
+        "Appelle prof/boss et dis bonjour puis raccroche",
+        "Change mot de passe tel et donne à quelqu'un 10min",
+        "Fais 50 pompes sans pause",
+        "Vocal chantant chanson d'amour à quelqu'un",
+        "Envoie 'tu es spécial(e)' à 10 contacts",
+        "Poste vidéo toi dansant bizarrement",
+        "Laisse groupe choisir ta prochaine publication",
+        "Appelle quelqu'un et parle que en questions 2min",
+        "Mange mélange épices/condiments random",
+        "Fais 30 burpees sans pause",
+        "Envoie vocal imitant 5 personnes différentes",
+        "Change bio tous réseaux en phrase groupe 48h",
+        "Appelle numéro inconnu et chante",
+        "Fais handstand pushups ou essaie 5 fois",
+        "Laisse quelqu'un texte pour toi 30min",
+        "Poste photo sans maquillage/filtre",
+        "Envoie message gênant à contact random",
+        "Fais 200 jumping jacks total",
+        "Vocal où tu avoues secret moyen",
+        "Change fond d'écran en photo groupe 1 semaine",
+        "Appelle et parle en chanson 1min",
+        "Mange truc périmé (pas dangereux)",
+        "Fais planche 3 minutes total",
+        "Laisse groupe voir tes recherches Google récentes",
+        "Poste 'Cherche l'amour' sur story",
+        "Envoie vocal pleurant faussement",
+        "Appelle et raconte blague nulle sérieusement",
+        "Fais 75 squats sautés",
+        "Change langue téléphone 24h",
+        "Laisse quelqu'un répondre à tes messages 15min",
+        "Poste throwback embarrassant",
+        "Envoie 'Je m'excuse' à 5 personnes sans contexte",
+        "Fais wall sit 5 minutes total",
+        "Vocal imitant animal 1min",
+        "Appelle et parle à l'envers",
+        "Mange sandwich bizarre (ex: Nutella+cornichon)",
+        "Fais 100 abdos",
+        "Laisse groupe voter sur ta story suivante",
+        "Envoie compliment exagéré à chaque contact liste",
+        "Poste vidéo talent caché",
+        "Appelle et chante joyeux anniversaire mauvais jour",
+        "Fais yoga pose difficile 2min",
+        "Change sonnerie en truc embarrassant 1 semaine",
+        "Laisse quelqu'un choisir ta tenue demain",
+        "Envoie vocal parlant super vite 1min",
+        "Poste photo plus moche de ta galerie",
+        "Appelle et fais semblant être célébrité",
+        "Fais 50 pompes diamant",
+        "Laisse groupe poser 1 question, réponds honnêtement",
+        "Envoie 'pense à moi' à 10 contacts",
+        "Poste citation inspirante avec ta photo moche",
+        "Fais course sur place 5min et filme dernière min"
     ],
+    
     hard: [
-        "Appelle tes parents et dis que tu as fait un tatouage énorme 😱",
-        "Publie la photo la plus moche de toi sur tous tes réseaux pendant 24h",
-        "Fais une déclaration d'amour vocale de 1 min à un membre random du groupe 💕",
-        "Mange un truc bizarre que le groupe choisit (combinaison dégueu) 🤢",
-        "Lis tes 15 derniers messages avec ton crush au groupe entier 👀",
-        "Fais une vidéo TikTok embarrassante en PUBLIC et partage 📹",
-        "Bloque ton meilleur ami pendant 2h sans prévenir",
-        "Appelle ton crush et chante-lui une chanson d'amour complète 🎵",
-        "Poste 'Je suis célibataire et je cherche l'amour' en story même si c'est faux",
-        "Envoie un vocal de 3 minutes où tu avoues tes 3 plus gros secrets 🤫",
-        "Laisse quelqu'un poster ce qu'il veut sur ton compte Insta pendant 15 min",
-        "Appelle ton crush et mets le haut-parleur devant tout le groupe",
-        "Fais une story 'À la recherche de l'amour' avec ton numéro visible",
-        "Envoie 'Je t'aime depuis longtemps' à quelqu'un et screenshot la réponse",
-        "Révèle qui dans ce groupe tu trouves le/la plus attirant(e)"
-    ],
-    extreme: [
-        "Donne ton téléphone à quelqu'un du groupe pendant 10 minutes 📱",
-        "Appelle ton ex et dis que tu veux le/la revoir",
-        "Poste une vidéo de toi en train de pleurer sur tous tes réseaux",
-        "Laisse le groupe lire TOUS tes messages de la journée",
-        "Fais une déclaration publique à ton crush sur les réseaux sociaux",
-        "Envoie un message vocal à tous tes contacts 'Je vous aime tous'",
-        "Change ta bio sur tous les réseaux en ce que le groupe décide pour 1 semaine"
+        "Appelle parents et dis que tu as fait énorme tatouage 😱",
+        "Publie photo la plus moche 24h tous réseaux",
+        "Déclaration d'amour vocale 2min à membre random 💕",
+        "Mange combinaison dégueu choisie groupe 🤢",
+        "Lis tes 20 derniers messages avec crush au groupe 👀",
+        "TikTok ultra embarrassant en public et poste 📹",
+        "Bloque meilleur ami 3h sans prévenir",
+        "Appelle crush et chante chanson d'amour complète 🎵",
+        "Poste 'Cherche âme sœur + numéro' story 24h",
+        "Vocal 5min avouant tes 5 plus gros secrets 🤫",
+        "Laisse quelqu'un poster ce qu'il veut ton Insta 30min",
+        "Appelle crush haut-parleur devant tout groupe",
+        "Envoie 'Je t'aime depuis longtemps' à quelqu'un screenshot",
+        "Révèle qui du groupe tu trouves le/la plus attirant(e)",
+        "Poste vidéo pleurant sur tous réseaux",
+        "Appelle ex et dis veux le/la revoir",
+        "Laisse groupe lire TOUS tes messages aujourd'hui",
+        "Fais déclaration publique crush sur réseaux",
+        "Donne téléphone déverrouillé à quelqu'un 15min",
+        "Envoie vocal à TOUS contacts 'vous me manquez'",
+        "Change bio tous réseaux groupe décide 1 semaine",
+        "Appelle parents avoue secret énorme (faux)",
+        "Poste photo galerie au hasard 10 fois story",
+        "Vocal avouant crush actuel avec détails",
+        "Laisse groupe voir historique navigation 1 semaine",
+        "Envoie message love à 20 contacts random",
+        "Poste 'Ma vie est un mensonge' et explique",
+        "Appelle et parle sentiments vrais à quelqu'un",
+        "Laisse quelqu'un lire tous tes messages privés 1 personne",
+        "Révèle fantasme le plus secret au groupe",
+        "Poste vidéo embarrassante archives sur TikTok",
+        "Appelle crush parents et présente toi",
+        "Envoie 'on devrait sortir ensemble' à contact random",
+        "Laisse groupe poser 10 questions, réponds tout",
+        "Poste confession embarrassante Facebook",
+        "Vocal détaillant moments les plus gênants vie",
+        "Appelle et déclare flamme à quelqu'un groupe choisit",
+        "Laisse quelqu'un contrôler ton tel 1h",
+        "Révèle secret de quelqu'un que tu connais",
+        "Poste 'J'ai fait une énorme erreur' tous réseaux",
+        "Envoie message dramatique à tous contacts",
+        "Appelle ex meilleur ami et excuse toi exagérément",
+        "Laisse groupe créer fake conversation pour toi",
+        "Poste liste personnes que tu as aimées",
+        "Vocal racontant ton histoire la plus honteuse",
+        "Appelle crush et avoue avec témoins",
+        "Laisse quelqu'un swiper Tinder pour toi 20min",
+        "Révèle pensées sur chaque membre groupe",
+        "Poste 'J'ai menti sur...' et invente truc fou",
+        "Envoie screenshot conversations privées récentes",
+        "Appelle personne que tu détestes et complimente",
+        "Laisse groupe lire journal intime si tu as",
+        "Poste photo/vidéo la plus embarrassante archives",
+        "Vocal avouant toutes tes ex crushes",
+        "Appelle parents raconte mensonge énorme puis avoue",
+        "Laisse quelqu'un répondre tes messages 2h",
+        "Révèle secret sur toi personne sait",
+        "Poste 'Je vais tout changer' avec plan détaillé",
+        "Envoie message love à personne détestais",
+        "Appelle prof/boss et dis quelque chose bizarre",
+        "Laisse groupe regarder tes photos cachées",
+        "Poste vidéo chantant chanson amoureuse à qqn",
+        "Vocal confession quelque chose jamais dit",
+        "Appelle numéro parents et parle sentiments",
+        "Laisse quelqu'un publier pour toi pendant journée",
+        "Révèle fantasme sur quelqu'un connaissez",
+        "Poste 'Besoin parler' tous réseaux puis explique",
+        "Envoie message dramatique à crush",
+        "Appelle et crie 'Je t'aime' puis raccroche",
+        "Laisse groupe décider grande décision ta vie",
+        "Poste photo avant/après embarrassante",
+        "Vocal expliquant moment le plus dark",
+        "Appelle ex et demande seconde chance (blague après)",
+        "Laisse quelqu'un accéder cloud/photos 10min",
+        "Révèle quelque chose fait jamais avoué",
+        "Poste vidéo dansant sur chanson gênante public",
+        "Envoie 'J'ai réfléchi à nous' 10 contacts",
+        "Appelle parents dis changé d'orientation",
+        "Laisse groupe poser questions intimes réponse complète",
+        "Poste story 'AMA' et réponds TOUT pendant 2h",
+        "Vocal révélant ce que penses vraiment chacun"
     ]
 };
 
+// ❓ 80 VÉRITÉS INTENSES PAR NIVEAU
 const verites = {
     facile: [
-        "C'est qui ton plus gros crush en ce moment ? 😍",
-        "C'est quand la dernière fois que tu as vraiment menti ? 🤥",
-        "Qui est la personne la plus belle/beau du groupe selon toi ? 👑",
-        "C'est quoi ton rêve le plus fou que tu veux réaliser ? 💭",
-        "Qui stalkes-tu le plus sur les réseaux sociaux ? 👀",
+        "C'est qui ton crush actuel et pourquoi ? 😍",
+        "Dernière fois que tu as menti et sur quoi ? 🤥",
+        "Qui est la personne la plus belle du groupe ? 👑",
+        "Quel est ton rêve le plus fou à réaliser ? 💭",
+        "Qui stalkes-tu le plus sur réseaux sociaux ? 👀",
         "Quelle est ta plus grande peur secrète ? 😨",
-        "Quel est ton film ou série préféré ? 🎬",
-        "As-tu déjà triché pendant un examen ? 📝",
+        "Film ou série que tu adores mais c'est gênant ? 🎬",
+        "As-tu déjà triché à un examen important ? 📝",
         "C'est quoi le truc le plus embarrassant dans ta chambre ? 😳",
-        "Quel est le contact le plus bizarre de ton téléphone ?",
+        "Quel est le contact le plus bizarre de ton tel ?",
         "As-tu déjà fait semblant d'être malade pour sécher ? 🤒",
-        "C'est quoi le dernier mensonge que tu as dit aujourd'hui ?",
-        "Quelle est ta chanson guilty pleasure ? 🎵",
-        "As-tu déjà pleuré devant un film ? Lequel ? 😢",
-        "C'est quoi le snack bizarre que tu aimes mais que personne comprend ? 🍕"
+        "Quel mensonge as-tu dit aujourd'hui ?",
+        "Ta chanson guilty pleasure que tu n'assumes pas ? 🎵",
+        "Dernier film qui t'a fait pleurer ? 😢",
+        "Snack bizarre que tu aimes mais personne comprend ? 🍕",
+        "Quelle célébrité voudrais-tu rencontrer ?",
+        "Ton plus grand regret cette année ?",
+        "Chose que tu collectionnes secrètement ?",
+        "Surnom embarrassant qu'on t'a donné ?",
+        "Application que tu utilises le plus ?",
+        "Dernier mensonge à tes parents ?",
+        "Personne que tu envies secrètement ?",
+        "Ton talent caché que peu connaissent ?",
+        "Pire cadeau que tu as reçu ?",
+        "Chanson qui te fait danser automatiquement ?",
+        "Ton phrase/mot que tu dis trop souvent ?",
+        "Dernier rêve bizarre dont tu te souviens ?",
+        "Chose que tu fais quand tu es seul(e) ?",
+        "Plat que tu détestes mais tout monde aime ?",
+        "Ton excuse préférée pour éviter qqch ?",
+        "Dernier achat inutile que tu as fait ?",
+        "Personne avec qui tu parles le plus ?",
+        "Ton souvenir d'enfance le plus gênant ?",
+        "Chose que tu ne prêtes jamais ?",
+        "Ton rituel avant de dormir ?",
+        "Film que tu as regardé 10+ fois ?",
+        "Chose qui t'énerve chez les gens ?",
+        "Ton plat préféré que tu mangerais H24 ?",
+        "Dernière fois que tu as eu très peur ?",
+        "Célébrité que tu trouves surcotée ?",
+        "Ton endroit préféré pour réfléchir ?",
+        "Chose que tu veux apprendre ?",
+        "Ton parfum de glace préféré ?",
+        "Dernier compliment que tu as reçu ?",
+        "Chose que tu faisais enfant plus maintenant ?",
+        "Ton animal préféré et pourquoi ?",
+        "Dernière personne avec qui tu as discuté ?",
+        "Ton jeu vidéo préféré si tu joues ?",
+        "Chose qui te fait rire à coup sûr ?",
+        "Ton défaut que tu voudrais changer ?",
+        "Dernière série que tu as bingewatché ?",
+        "Personne qui t'inspire le plus ?",
+        "Ton souvenir de vacances préféré ?",
+        "Chose que tu fais pour te détendre ?",
+        "Ton sport préféré à regarder/pratiquer ?",
+        "Dernier livre que tu as lu ?",
+        "Chose que tu voudrais avoir fait plus jeune ?",
+        "Ton emoji que tu utilises le plus ?",
+        "Personne à qui tu parles quand triste ?",
+        "Ton moment préféré de la journée ?",
+        "Chose que tu ne pourrais jamais faire ?",
+        "Ton plus grand accomplissement cette année ?",
+        "Dernier cadeau que tu as offert ?",
+        "Personne que tu n'as pas vue depuis longtemps ?",
+        "Ton plat que tu sais cuisiner ?",
+        "Chose que tu aimerais changer chez toi ?",
+        "Ton acteur/actrice préféré(e) ?",
+        "Dernière fois que tu as aidé quelqu'un ?",
+        "Chose que tu fais machinalement ?",
+        "Ton objectif pour l'année prochaine ?",
+        "Personne qui te fait le plus rire ?",
+        "Ton style vestimentaire préféré ?",
+        "Dernière chose que tu as apprise ?",
+        "Chose dont tu es le plus fier/fière ?",
+        "Ton parfum/odeur préféré(e) ?",
+        "Personne que tu respectes le plus ?",
+        "Ton plus beau souvenir récent ?",
+        "Chose que tu voudrais dire à quelqu'un ?",
+        "Ton rêve pour dans 5 ans ?",
+        "Dernière bonne action que tu as faite ?"
     ],
+    
     moyen: [
         "As-tu déjà embrassé quelqu'un de ce groupe ? Qui ? 💋",
-        "Quel est ton plus gros secret que tu n'as jamais dit à personne ? 🤐",
-        "As-tu déjà été secrètement amoureux de quelqu'un ici ? 💘",
-        "Quelle est la pire chose que tu aies faite dans ta vie ? 😈",
-        "Montre ta galerie photo, scrolle les yeux fermés et montre où tu tombes 📱",
-        "As-tu déjà trompé quelqu'un dans une relation ? 💔",
-        "Quel est le plus gros mensonge que tu as dit à tes parents ? 👨‍👩‍👦",
+        "Quel est ton plus gros secret jamais dit ? 🤐",
+        "As-tu été secrètement amoureux de quelqu'un ici ? 💘",
+        "Quelle est la pire chose que tu aies jamais faite ? 😈",
+        "Montre galerie, scrolle yeux fermés, montre résultat 📱",
+        "As-tu déjà trompé quelqu'un ? Contexte ? 💔",
+        "Plus gros mensonge à tes parents ? 👨‍👩‍👦",
         "As-tu déjà espionné le téléphone de quelqu'un ? 🕵️",
-        "Quelle est ta recherche Google la plus bizarre récemment ? 🔍",
-        "Si tu devais sortir avec quelqu'un du groupe, qui ce serait ? 💑",
-        "As-tu déjà envoyé un message à la mauvaise personne ? Raconte 📨",
-        "C'est qui ton crush secret dans une autre classe/groupe ?",
-        "As-tu déjà menti sur ton âge ? Dans quel contexte ? 🎂",
-        "Quelle est la chose la plus gênante dans ton historique de navigation ?",
-        "As-tu déjà fait semblant d'aimer quelqu'un ? Pourquoi ?"
-    ],
-    hard: [
-        "Lis ton dernier échange complet avec ton crush au groupe 💬",
-        "Montre les 10 dernières photos de ta galerie sans exception 📸",
-        "As-tu déjà fait quelque chose d'illégal ? Raconte tout 👮",
-        "Quel est ton fantasme le plus secret et bizarre ? 🙈",
-        "As-tu déjà eu des sentiments pour 2 personnes en même temps ? Qui ? 💔💔",
-        "Quelle est la chose la plus gênante que tes parents ont découverte ? 😱",
-        "Raconte ton pire date/rendez-vous avec TOUS les détails 💀",
-        "Quel est ton secret le plus dark que tu n'as jamais dit ? 🌑",
-        "Montre ton historique de recherche complet d'aujourd'hui 📱",
-        "As-tu déjà stalké ton ex ? Pendant combien de temps ? 👀",
-        "Révèle le message le plus embarrassant que tu as envoyé récemment",
-        "As-tu déjà menti dans CE jeu ? Sur quelle question exactement ? 🎭",
-        "Qui est la personne du groupe que tu évites et pourquoi vraiment ?",
-        "As-tu déjà eu des pensées bizarres sur quelqu'un d'interdit ? 🚫",
-        "Quel secret de quelqu'un d'autre tu connais et tu ne devrais pas ? 🤫"
-    ],
-    extreme: [
-        "Donne ton téléphone déverrouillé à quelqu'un pendant 5 minutes",
-        "Lis tous tes messages d'aujourd'hui à haute voix",
-        "Révèle ton plus gros secret sexuel",
-        "Raconte la chose la plus illégale que tu aies faite",
-        "Qui dans ce groupe tu as déjà fantasmé sur ?",
-        "Montre ton historique de navigation des 7 derniers jours"
+        "Ta recherche Google la plus bizarre récemment ? 🔍",
+        "Si devais sortir avec qqn du groupe, qui ? 💑",
+        "As-tu envoyé message à mauvaise personne ? Raconte 📨",
+        "Ton crush secret dans autre classe/cercle ?",
+        "As-tu menti sur ton âge ? Quand et pourquoi ? 🎂",
+        "Chose la plus gênante historique navigation ?",
+        "As-tu fait semblant d'aimer quelqu'un ? Pourquoi ?",
+        "Personne que tu as aimée sans qu'elle sache ?",
+        "Ton secret que seulement 1-2 personnes connaissent ?",
+        "As-tu déjà volé quelque chose ? Quoi ?",
+        "Pire date/rencard que tu as eu ? Détails",
+        "As-tu déjà lu messages privés de quelqu'un ?",
+        "Chose embarrassante que parents ont découverte ?",
+        "As-tu menti dans ce jeu avant ? Sur quoi ?",
+        "Personne dont tu étais jaloux(se) et pourquoi ?",
+        "Ton moment le plus gênant en public ?",
+        "As-tu déjà séché cours/travail pour qqch fun ?",
+        "Secret sur quelqu'un que tu ne devrais pas connaître ?",
+        "As-tu déjà fait quelque chose juste pour impressionner ?",
+        "Personne que tu évites et pourquoi vraiment ?",
+        "Ton mensonge le plus élaboré ?",
+        "As-tu déjà ressenti quelque chose pour ex de ami(e) ?",
+        "Chose que tu as faite sous pression groupe ?",
+        "Personne qui te manque mais tu ne contactes pas ?",
+        "As-tu déjà fait semblant de ne pas voir quelqu'un ?",
+        "Ton comportement dont tu as honte ?",
+        "As-tu déjà lu journal intime de quelqu'un ?",
+        "Chose que tu ferais si personne ne savait ?",
+        "As-tu déjà prétendu être malade pour échapper ?",
+        "Personne que tu as blessée et regrettes ?",
+        "Ton habitude bizarre que tu caches ?",
+        "As-tu déjà menti pour protéger quelqu'un ?",
+        "Chose que tu as faite par vengeance ?",
+        "Personne dont tu parles en mal mais gentil(le) devant ?",
+        "As-tu déjà fait quelque chose illégal mineur ?",
+        "Ton plus grand remords relationnel ?",
+        "As-tu déjà fait croire que tu étais occupé(e) ?",
+        "Chose embarrassante dans tes favoris/signets ?",
+        "As-tu déjà bloqué quelqu'un puis regretté ?",
+        "Personne que tu ghosté et pourquoi ?",
+        "Ton mensonge blanc le plus fréquent ?",
+        "As-tu déjà fouillé affaires de quelqu'un ?",
+        "Chose que tu as faite pour être populaire ?",
+        "As-tu déjà simulé quelque chose pour éviter ?",
+        "Personne dont tu as brisé le cœur ?",
+        "Ton secret sur ami proche ?",
+        "As-tu déjà révélé un secret qu'on t'a confié ?",
+        "Chose que tu caches à ta famille ?",
+        "As-tu déjà menti pour éviter conflits ?",
+        "Personne dont tu as été jaloux du succès ?",
+        "Ton comportement toxique dont tu es conscient ?",
+        "As-tu déjà gardé rancune longtemps ?",
+        "Chose que tu fais différemment devant autres ?",
+        "As-tu déjà utilisé quelqu'un ?",
+        "Personne à qui tu n'as jamais avoué",
+"Raconte chose sexuelle embarrassante de ton passé",
+        "Montre dernière personne que tu as stalké + pourquoi",
+        "Avoue pensée sombre que tu as eue",
+        "Révèle obsession bizarre que tu as",
+        "Raconte moment où tu as manipulé quelqu'un",
+        "Montre groupe/conversation que tu caches",
+        "Avoue chose que tu as faite sous influence",
+        "Révèle personne dont tu as brisé cœur exprès",
+        "Raconte ton moment le plus lâche",
+        "Montre comptes fake/secondaires que tu as",
+        "Avoue mensonge que tu maintiens depuis longtemps",
+        "Révèle rêve bizarre/inapproprié que tu as eu",
+        "Raconte moment où tu as trahi ami proche",
+        "Montre liste de personnes bloquées + raisons",
+        "Avoue chose illégale que tu ferais si pas de conséquences",
+        "Révèle secret sur relation passée jamais dit",
+         "Avoue chose immorale que tu as faite",
+        "Révèle secret sur ta sexualité jamais dit",
+        "Raconte trahison la plus grave que tu as commise",
+        "Montre dernier compte que tu as espionné + durée"
     ]
 };
 
-// 👥 DÉFIS DE GROUPE ÉPIQUES
+// 👥 DÉFIS DE GROUPE CRÉATIFS
 const defisGroupe = [
-    "📸 MAINTENANT : Tout le monde envoie une photo de son écran d'accueil",
-    "🗳️ VOTE ANONYME : Qui est le/la plus drôle ? (DM au bot)",
-    "🔄 SYNCHRONISATION : Changez tous vos photos de profil en même temps",
-    "💬 CHAÎNE DE COMPLIMENTS : Chacun complimente la personne suivante",
-    "⚡ SPEED QUESTIONS : Chacun pose UNE question embarrassante à son voisin",
-    "🎭 LE ROI : Le bot choisit quelqu'un qui devient roi pour 10 minutes",
-    "😂 BATTLE DE BLAGUES : Chacun envoie sa meilleure blague, on vote",
-    "🎲 SECRETS : Chacun écrit un secret anonyme au bot qui en révèle un",
-    "📱 SCREENSHOTS : Tout le monde envoie son dernier screenshot SANS TRICHE",
-    "🎤 KARAOKÉ GÉANT : Tout le monde envoie un vocal qui chante",
-    "🎯 DÉFIS EN CASCADE : Facile → Moyen → Hard (3 personnes tirées)",
-    "💭 CONFESSIONS : Écrivez un secret au bot, il le partage anonymement",
-    "🔥 HOT SEAT : Une personne random répond à 5 questions du groupe",
-    "🎬 IMITATIONS : Chacun imite un autre membre (vocal ou vidéo)",
-    "🏃 MARATHON : Tout le monde fait 30 squats et filme les 10 derniers"
+    "📸 MAINTENANT : Tout le monde photo écran d'accueil sans triche",
+    "🗳️ VOTE SECRET : Qui est le/la plus drôle ? (DM bot)",
+    "🔄 SYNCHRO : Changez TOUS photo profil en même temps exact",
+    "💬 CHAÎNE : Chacun complimente personne suivante originalement",
+    "⚡ SPEED : Chacun pose question embarrassante à voisin",
+    "🎭 ROI : Bot choisit quelqu'un roi/reine 10 minutes",
+    "😂 BATTLE BLAGUES : Meilleure blague gagne vote groupe",
+    "🎲 SECRETS : Écrivez secret anonyme, bot révèle un random",
+    "📱 SCREENSHOT : Dernier screenshot SANS EXCEPTION",
+    "🎤 KARAOKÉ GÉANT : Tout monde vocal chantant même chanson",
+    "🎯 CASCADE : 3 personnes tirées → Facile/Moyen/Hard",
+    "💭 CONFESSIONS : Secret au bot, partage anonymement",
+    "🔥 HOT SEAT : Personne random répond 7 questions groupe",
+    "🎬 IMITATIONS : Chacun imite autre membre vocal/vidéo",
+    "🏃 MARATHON : 50 squats tous ensemble et preuve",
+    "🎨 DESSIN : Dessinez membre du groupe, postez, devinez",
+    "📝 HISTOIRE : Chacun écrit phrase, créez histoire groupe",
+    "🎪 TALENT : Montrez talent caché en 30 secondes",
+    "🔮 VOYANCE : Bot prédit avenir de chacun",
+    "💥 BOMBE : Passez bombe, qui l'a à 2min perd",
+    "🎯 CIBLE : Devinez nombre 1-100, plus proche gagne",
+    "🎭 ACTING : Jouez scène ensemble improvisation",
+    "📊 SONDAGE : Votez sur question controversée",
+    "🎪 CIRCUS : Chacun fait trick physique et filme",
+    "🎨 MEME : Créez meme sur membre groupe",
+    "📢 ANNONCE : Chacun annonce quelque chose faux dramatique",
+    "🎬 SCÉNARIO : Inventez histoire embarrassante membre",
+    "🎯 DÉFI MINUTE : Chacun défi en 60 secondes max",
+    "💡 IDÉES : Brainstorm projet fou pour groupe",
+    "🎪 SHOW : Spectacle groupe 2 minutes improvisé",
+    "📸 PHOTO GROUPE : Tous même pose photo profil",
+    "🎭 RÔLE : Jouez personnages différents 10 min",
+    "🎨 ART : Créez œuvre collective digitale",
+    "📝 POÈME : Écrivez poème groupe ligne par ligne",
+    "🎪 PERFORMANCE : Danse/chanson synchronisée",
+    "🎯 MISSION : Accomplissez mission ensemble 30min",
+    "💬 DÉBAT : Débattez sujet random 5min",
+    "🎬 VIDÉO : Tournez clip courte ensemble",
+    "🎪 CHALLENGE : Relevez défi physique tous",
+    "📊 QUIZ : Questions groupe, meilleur score gagne"
 ];
 
-// 🎯 MINI-JEUX BONUS
-const miniJeux = [
-    "🎲 Dé : Lance le dé ! (tape un chiffre 1-6, si c'est le bon tu gagnes)",
-    "🃏 Carte : Devine la couleur (Rouge ou Noir)",
-    "🎰 Jackpot : 3 emojis identiques = Tu gagnes !",
-    "🔮 Voyance : Pose une question, le bot prédit ton avenir",
-    "💣 Bombe : Passe la bombe ! Qui l'a quand elle explose perd",
-    "🎯 Cible : Vise entre 1-100, le plus proche gagne"
-];
-
-// 💬 ROASTS & COMPLIMENTS AMÉLIORÉS
+// 💬 ROASTS NIVEAU LÉGENDE
 const roasts = [
-    "T'es tellement fauché que tu regardes les pubs YouTube jusqu'au bout pour économiser l'électricité 😂",
-    "Tu ressembles à une capture d'écran prise avec un Nokia 3310",
-    "T'es la raison pour laquelle les shampooings ont des instructions 📖",
-    "Si les excuses étaient des personnes, tu serais une conférence de 3 heures 🎤",
-    "T'es le genre de personne qui perd contre l'ordinateur à Pierre-Papier-Ciseaux ✊",
-    "Même Siri te met en silencieux quand tu parles 🔇",
-    "Tu mets 'Vu' et tu réponds 3 semaines après avec 'Mdr' 💀",
-    "T'es la pub de 30 secondes non-skippable de la vraie vie",
-    "Tu cours comme si tu charges une page Internet en 2005 avec 56k 🐌",
-    "T'es le contact 'Peut-être' dans le téléphone de TOUT LE MONDE",
-    "Tu danses comme si le WiFi lag en temps réel 📶",
-    "T'es tellement en retard que tu pourrais organiser ta propre fête d'anniversaire en janvier"
+    "T'es tellement fauché que tu regardes pubs YouTube comme divertissement 😂",
+    "Tu ressembles à une photo prise avec Nokia 3310 sous l'eau",
+    "T'es la raison pourquoi shampooings ont mode d'emploi détaillé 📖",
+    "Si excuses étaient personnes, tu serais conférence TEDx de 3h 🎤",
+    "T'es genre personne qui perd contre elle-même à Pierre-Papier-Ciseaux ✊",
+    "Même Siri fait semblant de ne pas t'entendre 🔇",
+    "Tu mets 'Vu' et réponds 3 semaines après avec juste 'mdr' 💀",
+    "T'es la pub non-skippable de 30 secondes de la vraie vie",
+    "Tu cours comme si tu chargeais page Internet avec 56k en 1999 🐌",
+    "T'es le contact 'Peut-être' dans téléphone de TOUT LE MONDE",
+    "Tu danses comme si WiFi laguait en temps réel 📶",
+    "T'es tellement en retard tu pourrais organiser ta propre fête passée",
+    "Ta vie amoureuse ressemble à mes notes de maths",
+    "Tu prends plus de temps à te préparer que Rome à se construire",
+    "T'es la raison pourquoi aliens ne visitent pas Terre",
+    "Ton sens de l'orientation est aussi bon que boussole cassée",
+    "Tu chantes comme si tu essayais de réveiller morts... pour les re-tuer",
+    "T'es tellement lent que escargots te dépassent en riant",
+    "Ta cuisine est classée arme de destruction massive",
+    "Tu es la preuve vivante que évolution peut aller en arrière",
+    "Ton humour est aussi sec que Sahara en pleine canicule",
+    "Tu mens tellement mal que Pinocchio semble crédible à côté",
+    "T'es tellement distrait que tu oublies ce que tu oublies",
+    "Ton style vestimentaire crie au secours silencieusement",
+    "Tu es l'équivalent humain d'un lundi matin pluvieux",
+    "Ta ponctualité est aussi légendaire que licornes",
+    "Tu parles tellement que même perroquets prennent notes",
+    "T'es tellement maladroit que gravité te déteste personnellement",
+    "Ton talent culinaire ferait pleurer Gordon Ramsay... de désespoir",
+    "Tu es la raison pourquoi mode d'emploi existent en 47 langues"
 ];
 
+// 💝 COMPLIMENTS NIVEAU DIEU
 const compliments = [
-    "T'es incroyable ! Même ton ombre refuse de te quitter tellement t'es génial(e) ☀️",
-    "Si t'étais un Pokemon, t'aurais toutes les évolutions parfaites et tu serais shiny ⚡",
-    "T'es le genre de personne que même les chiens abandonnent leur maître pour venir te voir 🐕",
-    "T'as un sourire qui pourrait résoudre tous les problèmes d'électricité du pays 😊",
-    "T'es tellement cool que la glace te demande des conseils de style 🧊",
-    "Si la gentillesse était un crime, tu serais en prison à perpétuité ❤️",
-    "T'es la notification que tout le monde est heureux de recevoir 📱",
-    "Ton énergie positive est plus contagieuse que tous les virus du monde 🌟",
-    "T'es le genre de personne qui rend les lundis matins supportables 📅",
-    "Si t'étais une chanson, tout le monde t'ajouterait en premier dans leur playlist 🎵",
-    "T'es comme le WiFi gratuit : tout le monde t'adore instantanément 📶",
-    "Ton rire est la meilleure musique qui existe au monde 🔔"
+    "T'es si incroyable que même ton ombre refuse de te quitter ☀️",
+    "Si t'étais Pokémon, tu serais shiny légendaire avec stats parfaites ⚡",
+    "T'es genre de personne pour qui chiens abandonnent leurs maîtres 🐕",
+    "Ton sourire pourrait résoudre crise énergétique mondiale 😊",
+    "T'es tellement cool que glace te demande conseils de vie 🧊",
+    "Si gentillesse était crime, tu aurais perpétuité sans libération conditionnelle ❤️",
+    "T'es la notification que tout monde est heureux de recevoir 📱",
+    "Ton énergie positive est plus contagieuse que tous virus réunis 🌟",
+    "T'es genre de personne qui rend lundis matins supportables 📅",
+    "Si t'étais chanson, tu serais #1 dans toutes les playlists 🎵",
+    "T'es comme WiFi gratuit illimité : tout le monde t'adore 📶",
+    "Ton rire est meilleure musique jamais composée 🔔",
+    "Tu illumines pièce juste en y entrant comme ampoule LED premium 💡",
+    "T'es chef-d'œuvre que même Louvre voudrait exposer 🎨",
+    "Ta présence améliore n'importe quelle situation instantanément",
+    "T'es combo parfait : beauté intérieure + extérieure + personnalité",
+    "Tu rends monde meilleur juste en existant dedans 🌍",
+    "T'es genre de personne qui restaure foi en humanité",
+    "Ton intelligence n'a d'égale que ta gentillesse",
+    "T'es l'ami(e) que tout monde rêve d'avoir 👫",
+    "Tu as don naturel pour rendre autres heureux",
+    "T'es preuve vivante que perfection existe vraiment",
+    "Ta loyauté est plus solide que diamant 💎",
+    "T'es inspirant(e) sans même essayer de l'être",
+    "Ton cœur est grand comme océan Pacifique 💙",
+    "T'es genre de personne qui laisse empreinte positive",
+    "Tu as cette aura spéciale que peu possèdent ✨",
+    "T'es équilibre parfait entre force et douceur",
+    "Ton authenticité est rafraîchissante dans monde de faux-semblants",
+    "T'es trésor que ceux qui te connaissent chérissent 💰"
 ];
 
-// 🔮 RÉPONSES 8BALL ÉTENDUES
+// 🔮 BOULE MAGIQUE ÉTENDUE
 const ball8 = [
-    "Oui, absolument et sans aucun doute ! ✅",
-    "C'est certain à 100%, je le garantis 💯",
-    "Sans l'ombre d'une hésitation, OUI !",
-    "Les étoiles et les signes disent que oui 🔮",
-    "Très très probable, presque sûr 🤔",
-    "Peut-être bien, peut-être pas... 🤷",
-    "Concentre-toi mieux et redemande dans 5 minutes ⏳",
-    "Je peux pas te dire maintenant, c'est compliqué 🤐",
+    "Oui, absolument et sans moindre doute possible ! ✅",
+    "C'est certain à 100%, je te le garantis personnellement 💯",
+    "Sans l'ombre d'une hésitation, la réponse est OUI !",
+    "Les étoiles, planètes et cosmos disent tous que oui 🔮",
+    "Très très probable, presque aussi sûr que soleil se lève 🤔",
+    "Peut-être bien, peut-être pas... l'avenir est flou 🤷",
+    "Concentre-toi mieux et redemande dans exactement 5 minutes ⏳",
+    "Je peux pas te dire maintenant, c'est vraiment compliqué 🤐",
     "Mieux vaut pas trop compter dessus mon ami(e) 😬",
-    "Mes sources magiques disent clairement NON 🚫",
-    "Peu probable, désolé de te décevoir 📉",
-    "Non franchement, laisse tomber 😕",
-    "Absolument PAS, n'y pense même plus ! ❌",
-    "Dans tes rêves peut-être, mais pas dans la réalité 💭",
-    "Demande plutôt à ta mère, elle saura mieux que moi 👩"
+    "Mes sources magiques interdimensionnelles disent clairement NON 🚫",
+    "Peu probable malheureusement, désolé de te décevoir 📉",
+    "Non franchement, laisse tomber cette idée maintenant 😕",
+    "Absolument PAS, n'y pense même plus une seconde ! ❌",
+    "Dans tes rêves peut-être, mais jamais dans réalité 💭",
+    "Demande plutôt à ta mère, elle saura mieux que moi 👩",
+    "Les signes sont mauvais, vraiment très mauvais ⚠️",
+    "C'est possible mais improbable statistiquement parlant 📊",
+    "Réessaye quand tu seras plus mature mentalement 🧠",
+    "La boule magique a crashé en traitant ta question 💥",
+    "Réponse trop dangereuse à révéler maintenant 🚨"
 ];
 
-// 💾 SYSTÈME DE DONNÉES
-let data = {leaderboard: {}, stats: {}, sessions: new Map()};
+// 💾 SYSTÈME DONNÉES
+let data = {
+    leaderboard: {},
+    stats: {},
+    sessions: new Map()
+};
 
 function loadData() {
     if(fs.existsSync('gamedata.json')) {
@@ -227,7 +589,11 @@ function saveData() {
 
 function addPoints(userId, userName, points) {
     if(!data.leaderboard[userId]) {
-        data.leaderboard[userId] = {name: userName, points: 0, defis: 0};
+        data.leaderboard[userId] = {
+            name: userName,
+            points: 0,
+            defis: 0
+        };
     }
     data.leaderboard[userId].points += points;
     data.leaderboard[userId].defis++;
@@ -236,7 +602,7 @@ function addPoints(userId, userName, points) {
 
 const rand = arr => arr[Math.floor(Math.random() * arr.length)];
 
-// 🤖 DÉMARRAGE DU BOT
+// 🤖 DÉMARRAGE BOT
 async function startBot() {
     loadData();
     
@@ -246,24 +612,37 @@ async function startBot() {
     const sock = makeWASocket({
         version,
         auth: state,
-        printQRInTerminal: true,
         logger: pino({ level: 'silent' }),
-        browser: ['Bot Action Vérité', 'Chrome', '1.0.0']
+        browser: ['Bot Action Verite', 'Chrome', '1.0.0']
     });
 
     sock.ev.on('creds.update', saveCreds);
 
     sock.ev.on('connection.update', (update) => {
-        const { connection, lastDisconnect } = update;
+        const { connection, lastDisconnect, qr } = update;
+        
+        // 📱 QR CODE
+        if(qr) {
+            console.log('\n╔════════════════════════════════╗');
+            console.log('║   📱 SCANNE CE QR CODE 📱      ║');
+            console.log('╚════════════════════════════════╝\n');
+            qrcode.generate(qr, { small: true });
+            console.log('\n╔════════════════════════════════╗');
+            console.log('║  WhatsApp → Menu → Appareils   ║');
+            console.log('║  → Connecter un appareil       ║');
+            console.log('╚════════════════════════════════╝\n');
+        }
         
         if(connection === 'close') {
             const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
-            console.log('⚠️ Connexion fermée. Reconnexion:', shouldReconnect);
+            console.log('⚠️  Connexion fermée. Reconnexion:', shouldReconnect);
             if(shouldReconnect) {
                 setTimeout(() => startBot(), 3000);
             }
         } else if(connection === 'open') {
-            console.log('✅ BOT CONNECTÉ ET PRÊT ! 🎮');
+            console.log('\n╔════════════════════════════════╗');
+            console.log('║  ✅ BOT CONNECTÉ ET PRÊT ! 🎮  ║');
+            console.log('╚════════════════════════════════╝\n');
         }
     });
 
@@ -279,54 +658,58 @@ async function startBot() {
             const name = m.pushName || from.split('@')[0];
             
             if(!data.stats[chat]) {
-                data.stats[chat] = {games: 0, actions: 0, verites: 0, lastPlayed: Date.now()};
+                data.stats[chat] = {
+                    games: 0,
+                    actions: 0,
+                    verites: 0,
+                    lastPlayed: Date.now()
+                };
             }
 
             const reply = async (text, mentions) => {
-                return await sock.sendMessage(chat, { text, mentions: mentions || [] });
+                return await sock.sendMessage(chat, {
+                    text,
+                    mentions: mentions || []
+                });
             };
 
-            // 📖 MENU PRINCIPAL
-            if(['!menu', '!aide', '!help', '!start', '!commandes'].includes(txt)) {
+            // 📖 MENU
+            if(['!menu', '!aide', '!help', '!start'].includes(txt)) {
                 return reply(
                     '╔══════════════════════╗\n' +
-                    '║ 🎮 *ACTION OU VÉRITÉ* ║\n' +
+                    '║ 🎮 ACTION OU VÉRITÉ  ║\n' +
                     '╚══════════════════════╝\n\n' +
-                    '⚡ *COMMANDES BASE*\n' +
-                    '├ !jouer → Démarrer\n' +
-                    '├ !action → Défi random\n' +
-                    '├ !verite → Question\n' +
-                    '├ !random → Surprise\n' +
-                    '└ !stop → Arrêter\n\n' +
-                    '🎚️ *PAR NIVEAU*\n' +
-                    '├ !facile → Soft 🟢\n' +
-                    '├ !moyen → Medium 🟡\n' +
-                    '├ !hard → Intense 🔴\n' +
-                    '└ !extreme → EXTRÊME 💀\n\n' +
-                    '👥 *SPÉCIAL GROUPE*\n' +
-                    '├ !groupe → Défi collectif\n' +
-                    '├ !duo → 2 joueurs random\n' +
-                    '├ !trio → 3 joueurs random\n' +
-                    '├ !roulette → 1 perdant\n' +
-                    '└ !qui [?] → Désigne qqn\n\n' +
-                    '🏆 *SCORES & STATS*\n' +
-                    '├ !fait → Valider (+10)\n' +
-                    '├ !score → Ton score\n' +
-                    '├ !top → Top 10\n' +
-                    '└ !stats → Stats groupe\n\n' +
-                    '🎉 *FUN & BONUS*\n' +
-                    '├ !roast → Se faire roaster 🔥\n' +
-                    '├ !compliment → Gentillesse 💝\n' +
-                    '├ !8ball [?] → Boule magique 🔮\n' +
-                    '├ !hasard → Question qui...\n' +
-                    '└ !minijeu → Mini-jeux\n\n' +
-                    '_Créé avec 🔥 - Version 2.0_'
+                    '⚡ *COMMANDES*\n' +
+                    '!jouer → Démarrer 🎮\n' +
+                    '!action → Défi random 🎯\n' +
+                    '!verite → Question ❓\n' +
+                    '!random → Surprise 🎲\n' +
+                    '!stop → Arrêter ❌\n\n' +
+                    '🎚️ *NIVEAUX*\n' +
+                    '!facile → Soft 🟢\n' +
+                    '!moyen → Medium 🟡\n' +
+                    '!hard → Intense 🔴\n\n' +
+                    '👥 *GROUPE*\n' +
+                    '!groupe → Tous 👨‍👩‍👦\n' +
+                    '!duo → 2 joueurs 👫\n' +
+                    '!roulette → 1 perdant 🎯\n' +
+                    '!qui [?] → Désigne 🎲\n\n' +
+                    '🏆 *SCORES*\n' +
+                    '!fait → +10 pts ✅\n' +
+                    '!score → Ton score 📊\n' +
+                    '!top → Top 10 🏆\n' +
+                    '!stats → Stats 📈\n\n' +
+                    '🎉 *FUN*\n' +
+                    '!roast → Roast 🔥\n' +
+                    '!compliment → ❤️\n' +
+                    '!8ball [?] → Magie 🔮\n\n' +
+                    '_80 actions/vérités par niveau !_'
                 );
             }
 
-            // 🎮 DÉMARRER LE JEU
+            // 🎮 JOUER
             if(txt === '!jouer') {
-                data.sessions.set(chat, {active: true, startTime: Date.now()});
+                data.sessions.set(chat, { active: true, startTime: Date.now() });
                 data.stats[chat].games++;
                 data.stats[chat].lastPlayed = Date.now();
                 saveData();
@@ -337,20 +720,20 @@ async function startBot() {
                     `🎯 !action → Défi\n` +
                     `❓ !verite → Question\n` +
                     `🎲 !random → Surprise\n` +
-                    `🎚️ !facile/!moyen/!hard/!extreme\n` +
-                    `📖 !menu → Toutes les commandes\n\n` +
-                    `_Chaque défi validé = +10 points_ 🏆\n\n` +
-                    `Que les jeux commencent ! 😈🔥`
+                    `🎚️ !facile/!moyen/!hard\n` +
+                    `📖 !menu → Toutes commandes\n\n` +
+                    `_+10 pts par défi validé_ 🏆\n\n` +
+                    `C'est parti ! 😈🔥`
                 );
             }
 
-            // 🔒 VÉRIF SESSION
+            // 🔒 VÉRIF
             const s = data.sessions.get(chat);
-            if(!s && txt.startsWith('!') && !['!menu','!aide','!help','!start','!commandes'].includes(txt)) {
-                return reply('⚠️ *Lance le jeu avec !jouer d\'abord !* 🎮');
+            if(!s && txt.startsWith('!') && !['!menu','!aide','!help','!start'].includes(txt)) {
+                return reply('⚠️ *Lance avec !jouer d\'abord !* 🎮');
             }
 
-            // 🎯 ACTIONS PAR NIVEAU
+            // 🎯 FACILE
             if(txt === '!facile') {
                 data.stats[chat].actions++;
                 saveData();
@@ -358,12 +741,12 @@ async function startBot() {
                     `🟢 *ACTION FACILE* 🟢\n\n` +
                     `@${from.split('@')[0]}\n\n` +
                     `${rand(defis.facile)}\n\n` +
-                    `✅ Tape !fait quand c'est fait\n` +
-                    `_Récompense: +5 points_ 🏆`,
+                    `✅ !fait → +5 pts 🏆`,
                     [from]
                 );
             }
 
+            // 🟡 MOYEN
             if(txt === '!moyen') {
                 data.stats[chat].actions++;
                 saveData();
@@ -371,12 +754,12 @@ async function startBot() {
                     `🟡 *ACTION MOYENNE* 🟡\n\n` +
                     `@${from.split('@')[0]}\n\n` +
                     `${rand(defis.moyen)}\n\n` +
-                    `✅ Tape !fait quand c'est fait\n` +
-                    `_Récompense: +10 points_ 🏆`,
+                    `✅ !fait → +10 pts 🏆`,
                     [from]
                 );
             }
 
+            // 🔴 HARD
             if(txt === '!hard') {
                 data.stats[chat].actions++;
                 saveData();
@@ -384,39 +767,23 @@ async function startBot() {
                     `🔴 *ACTION HARD* 🔴\n\n` +
                     `@${from.split('@')[0]}\n\n` +
                     `${rand(defis.hard)}\n\n` +
-                    `✅ Tape !fait quand c'est fait\n` +
-                    `_Récompense: +20 points_ 🏆🔥`,
+                    `✅ !fait → +20 pts 🏆🔥`,
                     [from]
                 );
             }
 
-            if(txt === '!extreme') {
-                data.stats[chat].actions++;
-                saveData();
-                return reply(
-                    `💀 *ACTION EXTRÊME* 💀\n\n` +
-                    `@${from.split('@')[0]}\n\n` +
-                    `⚠️ ATTENTION : NIVEAU DANGEREUX !\n\n` +
-                    `${rand(defis.extreme)}\n\n` +
-                    `✅ Tape !fait quand c'est fait\n` +
-                    `_Récompense: +50 points_ 🏆💀`,
-                    [from]
-                );
-            }
-
-            // ❓ VÉRITÉS
+            // ❓ VÉRITÉ
             if(txt.includes('!verite')) {
                 let niveau = 'moyen';
                 if(txt.includes('facile')) niveau = 'facile';
                 if(txt.includes('hard')) niveau = 'hard';
-                if(txt.includes('extreme')) niveau = 'extreme';
                 
                 data.stats[chat].verites++;
                 saveData();
                 
-                const colors = {facile: '🟢', moyen: '🟡', hard: '🔴', extreme: '💀'};
+                const colors = { facile: '🟢', moyen: '🟡', hard: '🔴' };
                 return reply(
-                    `${colors[niveau]} *VÉRITÉ ${niveau.toUpperCase()}* ${colors[niveau]}\n\n` +
+                    `${colors[niveau]} *VÉRITÉ* ${colors[niveau]}\n\n` +
                     `@${from.split('@')[0]}\n\n` +
                     `${rand(verites[niveau])}\n\n` +
                     `💬 Réponds honnêtement !`,
@@ -424,21 +791,21 @@ async function startBot() {
                 );
             }
 
-            // 🎯 ACTION ALÉATOIRE
+            // 🎯 ACTION
             if(txt === '!action') {
                 const niveaux = ['facile', 'moyen', 'hard'];
                 const niveau = rand(niveaux);
                 data.stats[chat].actions++;
                 saveData();
                 
-                const colors = {facile: '🟢', moyen: '🟡', hard: '🔴'};
-                const points = {facile: 5, moyen: 10, hard: 20};
+                const colors = { facile: '🟢', moyen: '🟡', hard: '🔴' };
+                const points = { facile: 5, moyen: 10, hard: 20 };
                 
                 return reply(
-                    `${colors[niveau]} *ACTION ${niveau.toUpperCase()}* ${colors[niveau]}\n\n` +
+                    `${colors[niveau]} *ACTION* ${colors[niveau]}\n\n` +
                     `@${from.split('@')[0]}\n\n` +
                     `${rand(defis[niveau])}\n\n` +
-                    `✅ !fait → +${points[niveau]} points 🏆`,
+                    `✅ !fait → +${points[niveau]} pts 🏆`,
                     [from]
                 );
             }
@@ -448,7 +815,7 @@ async function startBot() {
                 const isAction = Math.random() < 0.5;
                 const niveaux = ['facile', 'moyen', 'hard'];
                 const niveau = rand(niveaux);
-                const colors = {facile: '🟢', moyen: '🟡', hard: '🔴'};
+                const colors = { facile: '🟢', moyen: '🟡', hard: '🔴' };
                 
                 if(isAction) {
                     data.stats[chat].actions++;
@@ -457,7 +824,7 @@ async function startBot() {
                         `🎲 *RANDOM : ACTION* ${colors[niveau]}\n\n` +
                         `@${from.split('@')[0]}\n\n` +
                         `${rand(defis[niveau])}\n\n` +
-                        `✅ !fait pour valider 🏆`,
+                        `✅ !fait 🏆`,
                         [from]
                     );
                 } else {
@@ -472,405 +839,3 @@ async function startBot() {
                     );
                 }
             }
-
-            // 👥 DÉFI DE GROUPE
-            if(txt === '!groupe' && isGrp) {
-                return reply(
-                    `👥 *DÉFI DE GROUPE* 👥\n\n` +
-                    `${rand(defisGroupe)}\n\n` +
-                    `🎉 Tout le monde participe ! GO !`
-                );
-            }
-
-            // 👫 DUO
-            if((txt === '!duo' || txt === '!random2') && isGrp) {
-                try {
-                    const groupMeta = await sock.groupMetadata(chat);
-                    const participants = groupMeta.participants.map(p => p.id);
-                    
-                    if(participants.length < 2) {
-                        return reply('⚠️ Pas assez de membres dans le groupe !');
-                    }
-                    
-                    const chosen = [];
-                    while(chosen.length < 2) {
-                        const random = rand(participants);
-                        if(!chosen.includes(random)) chosen.push(random);
-                    }
-                    
-                    const defi = rand(defis.moyen);
-                    
-                    return reply(
-                        `🎲 *DUO ALÉATOIRE* 🎲\n\n` +
-                        `@${chosen[0].split('@')[0]} ❤️ @${chosen[1].split('@')[0]}\n\n` +
-                        `${defi}\n\n` +
-                        `💑 Vous devez le faire ensemble !`,
-                        chosen
-                    );
-                } catch(e) {
-                    return reply('❌ Erreur lors de la récupération des membres');
-                }
-            }
-
-            // 👨‍👩‍👦 TRIO
-            if((txt === '!trio' || txt === '!random3') && isGrp) {
-                try {
-                    const groupMeta = await sock.groupMetadata(chat);
-                    const participants = groupMeta.participants.map(p => p.id);
-                    
-                    if(participants.length < 3) {
-                        return reply('⚠️ Pas assez de membres (minimum 3) !');
-                    }
-                    
-                    const chosen = [];
-                    while(chosen.length < 3) {
-                        const random = rand(participants);
-                        if(!chosen.includes(random)) chosen.push(random);
-                    }
-                    
-                    const defi = rand(defis.hard);
-                    
-                    return reply(
-                        `🎲 *TRIO ALÉATOIRE* 🎲\n\n` +
-                        `@${chosen[0].split('@')[0]}\n` +
-                        `@${chosen[1].split('@')[0]}\n` +
-                        `@${chosen[2].split('@')[0]}\n\n` +
-                        `${defi}\n\n` +
-                        `👨‍👩‍👦 Tous les 3 ensemble !`,
-                        chosen
-                    );
-                } catch(e) {
-                    return reply('❌ Erreur lors de la récupération des membres');
-                }
-            }
-
-            // 🎯 ROULETTE RUSSE
-            if(txt === '!roulette' && isGrp) {
-                try {
-                    const groupMeta = await sock.groupMetadata(chat);
-                    const participants = groupMeta.participants.map(p => p.id);
-                    const loser = rand(participants);
-                    const defi = rand(defis.hard);
-                    
-                    return reply(
-                        `🎯 *ROULETTE RUSSE* 🎯\n\n` +
-                        `La chance a parlé...\n\n` +
-                        `@${loser.split('@')[0]} a perdu ! 💀\n\n` +
-                        `🔥 DÉFI HARD :\n${defi}\n\n` +
-                        `Pas de pitié ! 😈`,
-                        [loser]
-                    );
-                } catch(e) {
-                    return reply('❌ Erreur');
-                }
-            }
-
-            // ✅ VALIDER DÉFI
-            if(txt === '!fait') {
-                addPoints(from, name, 10);
-                return reply(
-                    `✅ *Défi validé !*\n\n` +
-                    `🏆 +10 points pour @${from.split('@')[0]} !\n\n` +
-                    `Tape !score pour voir ton total 📊`,
-                    [from]
-                );
-            }
-
-            // 📊 SCORE PERSONNEL
-            if(txt === '!score') {
-                const userStats = data.leaderboard[from] || {points: 0, defis: 0};
-                const rank = Object.entries(data.leaderboard)
-                    .sort((a,b) => b[1].points - a[1].points)
-                    .findIndex(([id]) => id === from) + 1;
-                
-                return reply(
-                    `📊 *TON SCORE* 📊\n\n` +
-                    `👤 ${userStats.name || name}\n` +
-                    `🏆 Points: ${userStats.points}\n` +
-                    `✅ Défis complétés: ${userStats.defis}\n` +
-                    `📈 Classement: #${rank || 'N/A'}\n\n` +
-                    `Continue comme ça ! 🔥`
-                );
-            }
-
-            // 🏆 TOP 10
-            if(txt === '!top') {
-                const sorted = Object.entries(data.leaderboard)
-                    .sort((a, b) => b[1].points - a[1].points)
-                    .slice(0, 10);
-                
-                if(sorted.length === 0) {
-                    return reply('🏆 *TOP 10* 🏆\n\nAucun score enregistré encore !\n\nTape !jouer pour commencer ! 🎮');
-                }
-                
-                let topMsg = '🏆 *TOP 10 DU GROUPE* 🏆\n\n';
-                const medals = ['🥇','🥈','🥉','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟'];
-                
-                sorted.forEach(([userId, data], index) => {
-                    const displayName = data.name || userId.split('@')[0].slice(-4);
-                    topMsg += `${medals[index]} ${displayName}: ${data.points} pts (${data.defis} défis)\n`;
-                });
-                
-                topMsg += `\n_Mis à jour: ${new Date().toLocaleDateString()}_`;
-                return reply(topMsg);
-            }
-
-            // 📈 STATISTIQUES
-            if(txt === '!stats') {
-                const groupStats = data.stats[chat];
-                const totalPlayers = Object.keys(data.leaderboard).length;
-                const totalPoints = Object.values(data.leaderboard).reduce((sum, p) => sum + p.points, 0);
-                
-                return reply(
-                    `📊 *STATISTIQUES DU GROUPE*\n\n` +
-                    `🎮 Parties jouées: ${groupStats.games}\n` +
-                    `🎯 Actions totales: ${groupStats.actions}\n` +
-                    `❓ Vérités totales: ${groupStats.verites}\n` +
-                    `👥 Joueurs actifs: ${totalPlayers}\n` +
-                    `💰 Points totaux: ${totalPoints}\n` +
-                    `📅 Dernière partie: ${new Date(groupStats.lastPlayed).toLocaleDateString()}\n\n` +
-                    `Continuez à jouer ! 🔥`
-                );
-            }
-
-            // 🔥 ROAST
-            if(txt === '!roast') {
-                return reply(
-                    `🔥 *ROAST BRUTAL* 🔥\n\n` +
-                    `@${from.split('@')[0]}\n\n` +
-                    `${rand(roasts)}\n\n` +
-                    `😂 C'était pour rire ! (ou pas...)`,
-                    [from]
-                );
-            }
-
-            // 💝 COMPLIMENT
-            if(txt === '!compliment') {
-                return reply(
-                    `💝 *COMPLIMENT SINCÈRE* 💝\n\n` +
-                    `@${from.split('@')[0]}\n\n` +
-                    `${rand(compliments)}\n\n` +
-                    `Tu le mérites vraiment ! 🥰`,
-                    [from]
-                );
-            }
-
-            // 🔮 BOULE MAGIQUE
-            if(txt.startsWith('!8ball ')) {
-                const question = txt.slice(7).trim();
-                if(!question) {
-                    return reply('🔮 Pose une question après !8ball\n\nExemple: !8ball Est-ce que je vais réussir ?');
-                }
-                
-                return reply(
-                    `🔮 *BOULE MAGIQUE* 🔮\n\n` +
-                    `❓ Question: "${question}"\n\n` +
-                    `🎱 Réponse: ${rand(ball8)}`
-                );
-            }
-
-            // 🎯 QUI...?
-            if(txt.startsWith('!qui ') && isGrp) {
-                try {
-                    const groupMeta = await sock.groupMetadata(chat);
-                    const participants = groupMeta.participants.map(p => p.id);
-                    const chosen = rand(participants);
-                    const question = txt.slice(5).trim();
-                    
-                    return reply(
-                        `🎯 *QUI ${question.toUpperCase()} ?*\n\n` +
-                        `C'est @${chosen.split('@')[0]} ! 😂\n\n` +
-                        `_Choisi totalement au hasard..._`,
-                        [chosen]
-                    );
-                } catch(e) {
-                    return reply('❌ Erreur');
-                }
-            }
-
-            // 🎲 HASARD (Question qui...)
-            if(txt === '!hasard' && isGrp) {
-                const questions = [
-                    "qui est le/la plus drôle",
-                    "qui a le meilleur style",
-                    "qui serait célèbre un jour",
-                    "qui est le/la plus intelligent(e)",
-                    "qui est le/la plus fou/folle",
-                    "qui a le meilleur humour",
-                    "qui serait le meilleur en couple",
-                    "qui parle le plus",
-                    "qui est toujours en retard",
-                    "qui envoie le plus de memes",
-                    "qui survivrait à une apocalypse zombie"
-                ];
-                
-                try {
-                    const groupMeta = await sock.groupMetadata(chat);
-                    const participants = groupMeta.participants.map(p => p.id);
-                    const chosen = rand(participants);
-                    const question = rand(questions);
-                    
-                    return reply(
-                        `🎲 *QUESTION HASARD*\n\n` +
-                        `${question} ?\n\n` +
-                        `➡️ C'est @${chosen.split('@')[0]} ! 👑`,
-                        [chosen]
-                    );
-                } catch(e) {
-                    return reply('❌ Erreur');
-                }
-            }
-
-            // 🎮 MINI-JEUX
-            if(txt === '!minijeu') {
-                return reply(
-                    `🎮 *MINI-JEUX DISPONIBLES*\n\n` +
-                    `${miniJeux.join('\n')}\n\n` +
-                    `_Plus de jeux à venir !_ 🎯`
-                );
-            }
-
-            // 🎲 DÉ
-            if(txt.startsWith('!de ')) {
-                const guess = parseInt(txt.slice(4));
-                if(isNaN(guess) || guess < 1 || guess > 6) {
-                    return reply('🎲 Tape un chiffre entre 1 et 6 !\n\nExemple: !de 3');
-                }
-                
-                const result = Math.floor(Math.random() * 6) + 1;
-                const win = guess === result;
-                
-                if(win) {
-                    addPoints(from, name, 15);
-                    return reply(
-                        `🎲 *LANCER DE DÉ* 🎲\n\n` +
-                        `Ton choix: ${guess}\n` +
-                        `Résultat: ${result}\n\n` +
-                        `🎉 GAGNÉ ! +15 points ! 🏆`,
-                        [from]
-                    );
-                } else {
-                    return reply(
-                        `🎲 *LANCER DE DÉ* 🎲\n\n` +
-                        `Ton choix: ${guess}\n` +
-                        `Résultat: ${result}\n\n` +
-                        `😢 Perdu ! Réessaye !`
-                    );
-                }
-            }
-
-            // 🃏 CARTE
-            if(txt.startsWith('!carte ')) {
-                const guess = txt.slice(7).toLowerCase();
-                if(!['rouge', 'noir'].includes(guess)) {
-                    return reply('🃏 Choisis "rouge" ou "noir" !\n\nExemple: !carte rouge');
-                }
-                
-                const result = Math.random() < 0.5 ? 'rouge' : 'noir';
-                const win = guess === result;
-                const emoji = result === 'rouge' ? '♥️' : '♠️';
-                
-                if(win) {
-                    addPoints(from, name, 10);
-                    return reply(
-                        `🃏 *CARTE MYSTÈRE* 🃏\n\n` +
-                        `Ton choix: ${guess}\n` +
-                        `Carte tirée: ${result} ${emoji}\n\n` +
-                        `🎉 GAGNÉ ! +10 points ! 🏆`,
-                        [from]
-                    );
-                } else {
-                    return reply(
-                        `🃏 *CARTE MYSTÈRE* 🃏\n\n` +
-                        `Ton choix: ${guess}\n` +
-                        `Carte tirée: ${result} ${emoji}\n\n` +
-                        `😢 Perdu ! Réessaye !`
-                    );
-                }
-            }
-
-            // 🎰 JACKPOT
-            if(txt === '!jackpot') {
-                const emojis = ['🍒','🍋','🍊','🍇','💎','7️⃣'];
-                const slot1 = rand(emojis);
-                const slot2 = rand(emojis);
-                const slot3 = rand(emojis);
-                
-                const win = slot1 === slot2 && slot2 === slot3;
-                
-                if(win) {
-                    addPoints(from, name, 50);
-                    return reply(
-                        `🎰 *JACKPOT* 🎰\n\n` +
-                        `[ ${slot1} | ${slot2} | ${slot3} ]\n\n` +
-                        `💰 JACKPOT !!! +50 POINTS !!! 🤑\n\n` +
-                        `@${from.split('@')[0]} TU ES UN CHAMPION ! 👑`,
-                        [from]
-                    );
-                } else if(slot1 === slot2 || slot2 === slot3 || slot1 === slot3) {
-                    addPoints(from, name, 5);
-                    return reply(
-                        `🎰 *JACKPOT* 🎰\n\n` +
-                        `[ ${slot1} | ${slot2} | ${slot3} ]\n\n` +
-                        `🎉 Deux identiques ! +5 points ! 🏆`
-                    );
-                } else {
-                    return reply(
-                        `🎰 *JACKPOT* 🎰\n\n` +
-                        `[ ${slot1} | ${slot2} | ${slot3} ]\n\n` +
-                        `😢 Perdu ! Réessaye ta chance !`
-                    );
-                }
-            }
-
-            // ❌ STOP
-            if(txt === '!stop') {
-                data.sessions.delete(chat);
-                return reply(
-                    `👋 *Jeu terminé !*\n\n` +
-                    `Merci d'avoir joué ! 🎮\n\n` +
-                    `Tape !jouer pour recommencer\n` +
-                    `Tape !stats pour voir les statistiques 📊`
-                );
-            }
-
-            // 💡 AIDE
-            if(txt === '!aide') {
-                return reply(
-                    `💡 *BESOIN D'AIDE ?*\n\n` +
-                    `📖 !menu → Voir toutes les commandes\n` +
-                    `🎮 !jouer → Démarrer une partie\n` +
-                    `❓ Le bot répond aux commandes avec "!"\n\n` +
-                    `🆘 Problème ? Le bot ne répond pas ?\n` +
-                    `→ Vérifie que tu as bien tapé !jouer\n` +
-                    `→ Les commandes commencent par "!"\n\n` +
-                    `Amusez-vous bien ! 🔥`
-                );
-            }
-
-        } catch(error) {
-            console.error('❌ Erreur:', error);
-        }
-    });
-
-    // 🔔 Notification de groupe
-    sock.ev.on('group-participants.update', async ({ id, participants, action }) => {
-        try {
-            if(action === 'add') {
-                const newMember = participants[0];
-                await sock.sendMessage(id, {
-                    text: `👋 Bienvenue @${newMember.split('@')[0]} !\n\n` +
-                          `🎮 Tape !menu pour voir les commandes\n` +
-                          `🔥 Tape !jouer pour commencer à jouer !`,
-                    mentions: [newMember]
-                });
-            }
-        } catch(e) {
-            console.error('Erreur notification:', e);
-        }
-    });
-}
-
-// 🚀 LANCEMENT
-console.log('🚀 Démarrage du Bot Action ou Vérité...\n');
-startBot().catch(err => console.error('Erreur fatale:', err));
