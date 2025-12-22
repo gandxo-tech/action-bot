@@ -434,4 +434,460 @@ const verites = {
         "T'as déjà révélé un secret qu'on t'avait confié ?",
         "Un truc que tu caches à toute ta famille ?",
         "T'as déjà menti pour éviter un conflit ?",
-        "Une personne dont t'as été
+        "Une personne dont t'as été jaloux du succès ?",
+        "Un comportement toxique dont t'es conscient(e) ?",
+        "T'as déjà gardé rancune pendant super longtemps ?",
+        "Un truc que tu fais différemment devant les autres ?",
+        "T'as déjà utilisé quelqu'un pour obtenir un truc ?",
+        "Une personne à qui t'as jamais avoué tes vrais sentiments ?",
+        "Ton plus gros regret dans une amitié ?",
+        "T'as déjà fait semblant d'aimer un cadeau ?",
+        "Un truc que tu juges chez les autres mais tu le fais aussi ?",
+        "T'as déjà saboté quelque chose pour quelqu'un ?",
+        "Une opportunité que t'as laissée passer et tu regrettes ?",
+        "T'as déjà menti sur tes sentiments pour quelqu'un ?",
+        "Un secret que tu garderas toute ta vie ?",
+        "T'as déjà fait un truc juste par jalousie ?",
+        "Une personne que t'as jugée trop vite ?",
+        "Ton mensonge le plus récent à un proche ?",
+        "T'as déjà espionné quelqu'un sur les réseaux avec un faux compte ?",
+        "Un truc que tu regrettes d'avoir dit à quelqu'un ?",
+        "T'as déjà fait pleurer quelqu'un volontairement ?",
+        "Une promesse importante que t'as jamais tenue ?",
+        "T'as déjà prétendu être quelqu'un d'autre ?",
+        "Un moment où tu savais que tu faisais mal mais tu l'as fait quand même ?"
+    ],
+    
+    hard: [
+        "Alors là c'est du lourd : qui dans ce groupe tu trouves vraiment attirant(e) ? Physiquement 😳",
+        "Balance un secret VRAIMENT dark de ton passé que personne connaît 💀",
+        "T'as déjà eu des pensées bizarres sur quelqu'un ici ? Développe 👀",
+        "La chose la plus gênante sexuellement qui t'est arrivée ? (reste approprié) 😱",
+        "Montre-nous la dernière personne que t'as stalkée sur Insta et explique pourquoi",
+        "Avoue une pensée vraiment sombre que t'as déjà eue 🌑",
+        "Ton obsession la plus bizarre que personne connaît ?",
+        "Raconte un moment où t'as clairement manipulé quelqu'un",
+        "Montre le groupe ou conversation que tu caches le plus 📱",
+        "Un truc que t'as fait sous influence que tu regrettes",
+        "Une personne dont t'as brisé le cœur exprès ?",
+        "Raconte le moment le plus lâche de ta vie",
+        "Montre tes comptes fake ou secondaires si t'en as",
+        "Un mensonge énorme que tu maintiens depuis longtemps ?",
+        "Un rêve bizarre ou inapproprié que t'as eu sur quelqu'un ?",
+        "Raconte quand t'as trahi un ami proche",
+        "Montre ta liste de personnes bloquées et explique chacune",
+        "Un truc illégal que tu ferais s'il y avait aucune conséquence ?",
+        "Balance un secret sur une de tes relations passées",
+        "Raconte le pire truc que t'as fait par jalousie",
+        "Un fantasme que t'assumes pas du tout ? (reste approprié)",
+        "La personne ici avec qui tu sortirais vraiment si tu pouvais ?",
+        "Ton plus gros secret sur ta vie sentimentale ?",
+        "Un truc immoral que t'as fait et jamais avoué ?",
+        "Qui dans tes contacts tu aimerais voir disparaître ?",
+        "Balance un secret sur ta sexualité (approprié) 🤐",
+        "La trahison la plus grave que t'as commise ?",
+        "Montre le dernier compte que t'as espionné et pendant combien de temps",
+        "Un truc que t'as fait dont t'as vraiment honte ?",
+        "Qui tu détestes secrètement dans ton entourage ?",
+        "Ton mensonge le plus gros à ton/ta meilleur(e) ami(e) ?",
+        "Un secret sur tes parents que personne doit savoir ?",
+        "La pire chose que t'as pensée sur quelqu'un ici ?",
+        "Un truc sexuel embarrassant de ton passé (approprié)",
+        "Qui t'a vraiment brisé le cœur et pourquoi ?",
+        "Ton addiction secrète la plus bizarre ?",
+        "Un moment où tu t'es senti(e) vraiment mal intentionné(e) ?",
+        "Balance un secret sur ton crush actuel",
+        "La chose la plus manipulatrice que t'as faite ?",
+        "Un message que t'as envoyé et supprimé ? À qui et pourquoi ?",
+        "Ton plus gros complexe physique ?",
+        "Une personne de ce groupe dont tu es jaloux/jalouse ?",
+        "Le truc le plus gênant qu'on pourrait trouver sur ton tel ?",
+        "Un fantasme que tu réaliserais si tu pouvais ? (approprié)",
+        "Qui tu aimerais embrasser ici si on te forçait ?",
+        "Balance un secret sur ta famille que personne sait",
+        "La pire pensée que t'as eue sur toi-même ?",
+        "Un truc que t'as fait sous pression que tu regrettes ?",
+        "Qui dans ta vie tu aimerais revoir et pourquoi ?",
+        "Ton plus gros secret sur ton passé amoureux ?",
+        "Une chose horrible que t'as dite sur quelqu'un ?",
+        "Le mensonge que tu vis depuis le plus longtemps ?",
+        "Un truc que tu ferais différemment si tu pouvais recommencer ?",
+        "Qui t'a le plus blessé dans ta vie et comment ?",
+        "Ton plus gros regret dans une relation ?",
+        "Une obsession malsaine que t'as déjà eue ?",
+        "Le secret le plus dark de ton cercle d'amis ?",
+        "Un truc que tu caches même à ton/ta meilleur(e) ami(e) ?",
+        "La personne que tu veux oublier mais tu peux pas ?",
+        "Ton comportement le plus toxique en relation ?",
+        "Un truc que t'as fait par vengeance et que tu regrettes ?",
+        "Qui tu stalkeras toujours même si tu dis que non ?",
+        "Ton plus grand complexe psychologique ?",
+        "Une personne à qui tu mentiras toujours ?",
+        "Le pire truc que t'as fait à quelqu'un qui t'aimait ?",
+        "Un secret que tu emporteras dans ta tombe ?",
+        "La chose dont tu as le plus honte dans ta vie ?",
+        "Qui tu ne pourras jamais pardonner vraiment ?",
+        "Ton plus gros mensonge à toi-même ?",
+        "Une chose que tu changerais dans ton passé relationnel ?",
+        "Le secret le plus lourd que tu portes en ce moment ?",
+        "Une personne que tu as utilisée et que tu regrettes ?",
+        "Ton plus grand remords dans la vie jusqu'à maintenant ?",
+        "Un truc que tu ne diras jamais à personne normalement ?",
+        "La vérité sur toi que tu caches le plus aux autres ?",
+        "Qui dans ta vie tu aimerais qu'il/elle sache ce que tu ressens ?",
+        "Ton secret le plus dangereux à révéler ?",
+        "Une chose sur toi que personne croirait si tu la disais ?",
+        "Le mensonge que tu voudrais avouer mais tu peux pas ?"
+    ]
+};
+
+// 👥 DÉFIS DE GROUPE
+const defisGroupe = [
+    "Ok là tout le monde : screenshot de votre écran d'accueil MAINTENANT sans tricher 📸",
+    "VOTE SECRET : Envoyez-moi en DM qui est le/la plus drôle du groupe, je compte",
+    "SYNCHRO : Tout le monde change de photo de profil en même temps exact, go go go 🔄",
+    "CHAÎNE DE COMPLIMENTS : Chacun complimente la personne suivante de manière originale 💬",
+    "SPEED ROUND : Chacun pose une question gênante à la personne d'après ⚡",
+    "MODE ROI : Je choisis quelqu'un qui sera roi/reine pendant 10 minutes 🎭",
+    "BATTLE DE BLAGUES : Meilleure blague gagne, le groupe vote à la fin 😂",
+    "SECRETS ANONYMES : Écrivez un secret, j'en révèle un au hasard 🎲",
+    "SCREENSHOT CHALLENGE : Dernier screenshot SANS EXCEPTION, on veut tout voir 📱",
+    "KARAOKÉ GÉANT : Tout le monde vocal en chantant la même chanson 🎤",
+    "CASCADE DE DÉFIS : Je tire 3 personnes random → Facile/Moyen/Hard 🎯",
+    "CONFESSIONS : Envoyez-moi un secret en privé, je partage anonymement 💭",
+    "HOT SEAT : Personne random doit répondre à 5 questions du groupe 🔥",
+    "BATTLE D'IMITATIONS : Chacun imite un autre membre en vocal/vidéo 🎬",
+    "MARATHON FITNESS : 30 squats tous ensemble, je veux les preuves 🏃",
+    "DESSIN MYSTÈRE : Dessinez un membre du groupe, postez, on devine qui c'est 🎨",
+    "HISTOIRE COLLECTIVE : Chacun écrit une phrase, on crée une histoire de groupe 📝",
+    "SHOW DE TALENTS : Montrez un talent caché en 20 secondes max 🎪",
+    "VOYANCE : Je prédis l'avenir de 3 personnes random du groupe 🔮",
+    "BOMBE À RETARDEMENT : On passe la bombe, qui l'a à la 2ème minute perd 💥",
+    "DEVINE LE NOMBRE : 1 à 100, le plus proche gagne un privilège 🎯",
+    "IMPRO THÉÂTRE : Jouez une scène ensemble en improvisation totale 🎭",
+    "SONDAGE CHAUD : Je pose une question controversée, votez tous 📊",
+    "CIRCUS CHALLENGE : Chacun fait un trick physique et le filme 🎪",
+    "BATTLE DE MEMES : Créez le meilleur meme sur un membre du groupe 🎨",
+    "ANNONCES DRAMATIQUES : Chacun annonce quelque chose de faux mais dramatique 📢",
+    "SCÉNARIO GÊNANT : Inventez une histoire embarrassante sur un membre 🎬",
+    "DÉFI MINUTE : Chacun un mini-défi en max 60 secondes ⚡",
+    "BRAINSTORM FOU : Proposez un projet complètement fou pour le groupe 💡",
+    "SPECTACLE IMPROVISÉ : Show de 2 minutes tous ensemble, go 🎪",
+    "PHOTO DE GROUPE : Tous la même pose en photo de profil 📸",
+    "JEU DE RÔLES : Tout le monde joue un personnage différent pendant 10 min 🎭",
+    "ART COLLECTIF : Créez une œuvre ensemble, chacun ajoute un truc 🎨",
+    "POÈME DE GROUPE : Écrivez un poème ligne par ligne 📝",
+    "PERFORMANCE SYNCHRO : Danse ou chanson synchronisée ensemble 🎪",
+    "MISSION IMPOSSIBLE : Mission à accomplir ensemble en 20 minutes 🎯",
+    "DÉBAT RANDOM : Débattez d'un sujet au hasard pendant 3 minutes 💬",
+    "CLIP VIDÉO : Tournez un mini clip ensemble 🎬",
+    "CHALLENGE PHYSIQUE : Relevez un défi sportif tous ensemble 🎪",
+    "QUIZ DU GROUPE : Questions sur vous tous, meilleur score gagne 📊"
+];
+
+// 🔥 ROASTS
+const roasts = [
+    "Mec t'es tellement fauché tu regardes les pubs YouTube comme si c'était Netflix 😂",
+    "Tu ressembles à une photo prise avec un Nokia 3310 sous l'eau frère",
+    "T'es littéralement la raison pour laquelle les shampoings ont des instructions détaillées 📖",
+    "Si les excuses étaient des personnes, tu serais une conférence TEDx de 3 heures 🎤",
+    "T'es le genre de personne qui perd contre elle-même à Pierre-Papier-Ciseaux ✊",
+    "Même Siri fait semblant de pas t'entendre quand tu lui parles 🔇",
+    "Tu mets 'Vu' et tu réponds 3 semaines après avec juste 'mdr' 💀",
+    "T'es la pub non-skippable de 30 secondes de la vraie vie gros",
+    "Tu cours comme si tu essayais de charger une page avec Internet 56k en 1999 🐌",
+    "T'es le contact 'Peut-être' dans le téléphone de TOUT LE MONDE",
+    "Tu danses comme si ton WiFi laguait en temps réel mdr 📶",
+    "T'es tellement en retard tu pourrais organiser ta propre fête surprise passée",
+    "Ta vie amoureuse ressemble à mes notes de maths : inexistante",
+    "Tu prends plus de temps à te préparer que Rome à se construire frère",
+    "T'es littéralement la raison pour laquelle les aliens visitent pas la Terre",
+    "Ton sens de l'orientation est aussi bon qu'une boussole cassée",
+    "Tu chantes comme si t'essayais de réveiller les morts... pour les re-tuer",
+    "T'es tellement lent que même les escargots te dépassent en rigolant 🐌",
+    "Ta cuisine est officiellement classée arme de destruction massive",
+    "Tu es la preuve vivante que l'évolution peut aller en arrière aussi",
+    "Ton humour est sec comme le Sahara en pleine canicule d'août",
+    "Tu mens tellement mal que même Pinocchio semble crédible à côté",
+    "T'es tellement distrait que tu oublies ce que t'étais en train d'oublier",
+    "Ton style vestimentaire crie au secours silencieusement chaque jour",
+    "Tu es l'équivalent humain d'un lundi matin pluvieux de novembre",
+    "Ta ponctualité est aussi légendaire que les licornes roses",
+    "Tu parles tellement que même les perroquets prennent des notes",
+    "T'es tellement maladroit que la gravité t'en veut personnellement",
+    "Ton talent culinaire ferait pleurer Gordon Ramsay de désespoir pur",
+    "T'es la raison pour laquelle les modes d'emploi existent en 47 langues"
+];
+
+// 💝 COMPLIMENTS
+const compliments = [
+    "Franchement t'es tellement cool que même ton ombre refuse de te quitter ☀️",
+    "Si t'étais un Pokémon, tu serais un shiny légendaire avec des stats parfaites ⚡",
+    "T'es le genre de personne pour qui les chiens abandonneraient leurs maîtres 🐕",
+    "Ton sourire pourrait littéralement résoudre la crise énergétique mondiale 😊",
+    "T'es tellement cool que même la glace te demande des conseils de vie 🧊",
+    "Si la gentillesse était un crime, t'aurais la perpétuité sans libération conditionnelle ❤️",
+    "T'es la notification que tout le monde est content de recevoir 📱",
+    "Ton énergie positive est plus contagieuse que tous les virus réunis 🌟",
+    "T'es le genre de personne qui rend les lundis matins supportables 📅",
+    "Si t'étais une chanson, tu serais #1 dans toutes les playlists du monde 🎵",
+    "T'es comme du WiFi gratuit et illimité : tout le monde t'adore 📶",
+    "Ton rire c'est littéralement la meilleure musique jamais composée 🔔",
+    "Tu illumines n'importe quelle pièce juste en y entrant comme une ampoule LED premium 💡",
+    "T'es un chef-d'œuvre que même le Louvre voudrait exposer en permanence 🎨",
+    "Ta présence améliore n'importe quelle situation instantanément frère",
+    "T'es le combo parfait : beauté intérieure + extérieure + personnalité de ouf",
+    "Tu rends le monde meilleur juste en existant dedans sérieux 🌍",
+    "T'es le genre de personne qui restaure la foi en l'humanité",
+    "Ton intelligence n'a d'égale que ta gentillesse et ça c'est rare",
+    "T'es l'ami(e) que absolument tout le monde rêve d'avoir 👫",
+    "Tu as un don naturel pour rendre les autres heureux autour de toi",
+    "T'es la preuve vivante que la perfection existe vraiment dans ce monde",
+    "Ta loyauté est plus solide qu'un diamant de 10 carats 💎",
+    "T'es inspirant(e) sans même essayer de l'être et ça c'est puissant",
+    "Ton cœur est grand comme l'océan Pacifique sérieusement 💙",
+    "T'es le genre de personne qui laisse une empreinte positive partout",
+    "Tu as cette aura spéciale que très peu de personnes possèdent ✨",
+    "T'es l'équilibre parfait entre force et douceur frère/sœur",
+    "Ton authenticité est rafraîchissante dans ce monde de faux-semblants",
+    "T'es un trésor que ceux qui te connaissent vraiment chérissent 💰"
+];
+
+// 🔮 BOULE MAGIQUE
+const ball8 = [
+    "Oui, absolument et sans le moindre doute possible ! ✅",
+    "C'est certain à 100%, je te le garantis perso 💯",
+    "Sans l'ombre d'une hésitation, la réponse est clairement OUI !",
+    "Les étoiles, planètes et tout le cosmos disent que oui 🔮",
+    "Très très probable, presque aussi sûr que le soleil va se lever 🤔",
+    "Peut-être bien, peut-être pas... l'avenir est un peu flou là 🤷",
+    "Concentre-toi mieux et redemande dans exactement 5 minutes ⏳",
+    "Je peux vraiment pas te dire maintenant, c'est compliqué 🤐",
+    "Mieux vaut pas trop compter dessus mon ami(e) 😬",
+    "Mes sources magiques interdimensionnelles disent clairement NON 🚫",
+    "Peu probable malheureusement, désolé de te décevoir comme ça 📉",
+    "Non franchement, laisse tomber cette idée maintenant 😕",
+    "Absolument PAS, n'y pense même plus une seconde ! ❌",
+    "Dans tes rêves peut-être, mais jamais dans la réalité frère 💭",
+    "Demande plutôt à ta mère, elle saura mieux que moi 👩",
+    "Les signes sont mauvais, vraiment très mauvais là ⚠️",
+    "C'est possible mais super improbable statistiquement 📊",
+    "Réessaye quand tu seras plus mature mentalement 🧠",
+    "La boule magique a crashé en traitant ta question bizarre 💥",
+    "La réponse est trop dangereuse à révéler maintenant 🚨"
+];
+
+// 💾 SYSTÈME DE DONNÉES
+let data = {
+    leaderboard: {},
+    stats: {},
+    sessions: new Map(),
+    userProgress: {}
+};
+
+function loadData() {
+    try {
+        if(fs.existsSync('gamedata.json')) {
+            const loaded = JSON.parse(fs.readFileSync('gamedata.json'));
+            data.leaderboard = loaded.leaderboard || {};
+            data.stats = loaded.stats || {};
+            data.userProgress = loaded.userProgress || {};
+        }
+    } catch(e) {
+        console.log('⚠️ Erreur chargement données:', e.message);
+    }
+}
+
+function saveData() {
+    try {
+        fs.writeFileSync('gamedata.json', JSON.stringify({
+            leaderboard: data.leaderboard,
+            stats: data.stats,
+            userProgress: data.userProgress
+        }, null, 2));
+    } catch(e) {
+        console.log('⚠️ Erreur sauvegarde:', e.message);
+    }
+}
+
+function addPoints(userId, userName, points) {
+    if(!data.leaderboard[userId]) {
+        data.leaderboard[userId] = {
+            name: userName,
+            points: 0,
+            defis: 0,
+            streak: 0,
+            lastPlay: Date.now()
+        };
+    }
+    
+    const now = Date.now();
+    const lastPlay = data.leaderboard[userId].lastPlay;
+    const daysDiff = Math.floor((now - lastPlay) / (1000 * 60 * 60 * 24));
+    
+    if(daysDiff <= 1) {
+        data.leaderboard[userId].streak++;
+    } else if(daysDiff > 1) {
+        data.leaderboard[userId].streak = 1;
+    }
+    
+    data.leaderboard[userId].points += points;
+    data.leaderboard[userId].defis++;
+    data.leaderboard[userId].lastPlay = now;
+    saveData();
+}
+
+const rand = arr => arr[Math.floor(Math.random() * arr.length)];
+
+// 🤖 DÉMARRAGE BOT
+async function startBot() {
+    loadData();
+    
+    const { state, saveCreds } = await useMultiFileAuthState('auth_session');
+    const { version } = await fetchLatestBaileysVersion();
+    
+    const sock = makeWASocket({
+        version,
+        auth: state,
+        logger: pino({ level: 'silent' }),
+        browser: ['Bot Action Vérité', 'Chrome', '1.0.0'],
+        printQRInTerminal: false
+    });
+
+    sock.ev.on('creds.update', saveCreds);
+
+    sock.ev.on('connection.update', (update) => {
+        const { connection, lastDisconnect, qr } = update;
+        
+        if(qr) {
+            console.log('\n╔════════════════════════════════╗');
+            console.log('║   📱 SCANNE CE QR CODE 📱      ║');
+            console.log('╚════════════════════════════════╝\n');
+            qrcode.generate(qr, { small: true });
+            console.log('\n╔════════════════════════════════╗');
+            console.log('║  WhatsApp → Menu → Appareils   ║');
+            console.log('║  → Connecter un appareil       ║');
+            console.log('╚════════════════════════════════╝\n');
+        }
+        
+        if(connection === 'close') {
+            const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
+            console.log('⚠️  Connexion fermée. Reconnexion:', shouldReconnect);
+            if(shouldReconnect) {
+                setTimeout(() => startBot(), 3000);
+            }
+        } else if(connection === 'open') {
+            console.log('\n╔════════════════════════════════╗');
+            console.log('║  ✅ BOT CONNECTÉ ET PRÊT ! 🎮  ║');
+            console.log('╚════════════════════════════════╝\n');
+        }
+    });
+
+    sock.ev.on('messages.upsert', async ({ messages }) => {
+        try {
+            const m = messages[0];
+            if(!m.message || m.key.fromMe) return;
+            
+            const chat = m.key.remoteJid;
+            const txt = (m.message.conversation || m.message.extendedTextMessage?.text || '').trim();
+            const from = m.key.participant || m.key.remoteJid;
+            const isGrp = chat.endsWith('@g.us');
+            const name = m.pushName || from.split('@')[0];
+            const isAdmin = from === ADMIN;
+            
+            if(!data.stats[chat]) {
+                data.stats[chat] = {
+                    games: 0,
+                    actions: 0,
+                    verites: 0,
+                    lastPlayed: Date.now()
+                };
+            }
+
+            const reply = async (text, mentions) => {
+                return await sock.sendMessage(chat, {
+                    text,
+                    mentions: mentions || []
+                });
+            };
+
+            // 👑 COMMANDE ADMIN - ANNONCE
+            if(txt.startsWith('!annonce ') && isAdmin) {
+                const message = txt.slice(9).trim();
+                if(!message) {
+                    return reply('⚠️ Utilise : !annonce [ton message]');
+                }
+                
+                return reply(
+                    `📢 *ANNONCE OFFICIELLE* 📢\n\n` +
+                    `${message}\n\n` +
+                    `_Message de l'administrateur_ 👑`
+                );
+            }
+
+            // 📖 MENU
+            if(['!menu', '!aide', '!help', '!start', '!salut', 'salut', 'hello'].includes(txt.toLowerCase())) {
+                return reply(
+                    `Salut ${name} ! 👋 Moi c'est ton bot préféré 😎\n\n` +
+                    `━━━━━━━━━━━━━━━━━\n` +
+                    `🎮 *COMMENT JOUER ?*\n` +
+                    `━━━━━━━━━━━━━━━━━\n\n` +
+                    `*!jouer* → On démarre la partie 🚀\n` +
+                    `*!action* → Je te balance un défi 🎯\n` +
+                    `*!verite* → Je te pose une question ❓\n` +
+                    `*!random* → Surprise ! 🎲\n` +
+                    `*!stop* → On arrête là ❌\n\n` +
+                    `━━━━━━━━━━━━━━━━━\n` +
+                    `🎚️ *NIVEAUX DE DIFFICULTÉ*\n` +
+                    `━━━━━━━━━━━━━━━━━\n\n` +
+                    `*!facile* → Pour commencer 🟢\n` +
+                    `*!moyen* → Ça chauffe 🟡\n` +
+                    `*!hard* → Pour les warriors 🔴\n\n` +
+                    `━━━━━━━━━━━━━━━━━\n` +
+                    `👥 *MODES GROUPE*\n` +
+                    `━━━━━━━━━━━━━━━━━\n\n` +
+                    `*!groupe* → Défi pour tous 🎉\n` +
+                    `*!duo* → Tire 2 personnes 👫\n` +
+                    `*!roulette* → Quelqu'un va morfler 🎯\n` +
+                    `*!qui [question]* → Je désigne qqn 🎲\n\n` +
+                    `━━━━━━━━━━━━━━━━━\n` +
+                    `🏆 *TON SCORE*\n` +
+                    `━━━━━━━━━━━━━━━━━\n\n` +
+                    `*!fait* → Valide ton défi (+10 pts) ✅\n` +
+                    `*!score* → Tes stats perso 📊\n` +
+                    `*!top* → Classement top 10 🏆\n` +
+                    `*!stats* → Stats du groupe 📈\n\n` +
+                    `━━━━━━━━━━━━━━━━━\n` +
+                    `🎉 *BONUS FUN*\n` +
+                    `━━━━━━━━━━━━━━━━━\n\n` +
+                    `*!roast* → Je te roast 🔥\n` +
+                    `*!compliment* → Boost d'estime ❤️\n` +
+                    `*!8ball [question]* → Boule magique 🔮\n` +
+                    `*!battle* → Défie quelqu'un ⚔️\n` +
+                    `*!slot* → Machine à sous 🎰\n` +
+                    `*!dice* → Lance les dés 🎲\n\n` +
+                    `_Tape !jouer pour commencer ! 🎮_`
+                );
+            }
+
+            // 🎮 JOUER
+            if(txt.toLowerCase() === '!jouer' || txt.toLowerCase() === '!go') {
+                data.sessions.set(chat, { 
+                    active: true, 
+                    startTime: Date.now(),
+                    currentRound: 1
+                });
+                data.stats[chat].games++;
+                data.stats[chat].lastPlayed = Date.now();
+                saveData();
+                
+                return reply(
+                    `🎉 *C'EST PARTI ${name.toUpperCase()} !* 🎉\n\n` +
+                    `Bienvenue dans le game le plus fou 🔥\n\n` +
+                    `━━━━━━━━━━━━━━━━━\n\n` +
+                    `🎯 *!action* → Défi instant\n` +
+                    `❓ *!verite* → Question hot\n` +
+                    `🎲 *!random* → Surprise totale\n\n` +
+                    `━━━━━━━━━━━━━━━━━\n\n` +
+                    `🎚️ Choisis ton niveau :\n` +
+                    
