@@ -343,4 +343,67 @@ const roasts = [
     "T'es l'équivalent humain d'un lundi matin pluvieux",
     "Ta ponctualité est aussi légendaire que les licornes",
     "Tu parles tellement que même les perroquets prennent des notes",
+"T'es tellement maladroit que la gravité te déteste personnellement",
+    "Ton talent culinaire ferait pleurer Gordon Ramsay... de désespoir",
+    "T'es la raison pour laquelle les modes d'emploi existent en 47 langues"
+];
+
+const compliments = [
+    "Frr t'es tellement incroyable que même ton ombre refuse de te quitter ☀️",
+    "Si t'étais un Pokemon tu serais un shiny légendaire avec des stats parfaites 💯",
+    "T'es le genre de personne pour qui les chiens abandonnent leurs maîtres",
+    "Ton sourire pourrait littéralement résoudre la crise énergétique mondiale",
+    "T'es tellement stylé que la glace te demande des conseils de vie",
+    "Si la gentillesse était un crime tu serais en perpétuité sans libération",
+    "T'es la notification que tout le monde est heureux de recevoir",
+    "Ton énergie positive est plus contagieuse que tous les virus réunis",
+    "T'es le genre de personne qui rend les lundis matins supportables",
+    "Si t'étais une chanson tu serais #1 dans toutes les playlists mondiales",
+    "T'es comme le WiFi gratuit illimité : tout le monde t'adore direct",
+    "Ton rire est littéralement la meilleure musique jamais composée",
+    "Tu illumines une pièce juste en y entrant comme une ampoule LED premium",
+    "T'es le chef-d'œuvre que même le Louvre voudrait exposer",
+    "Ta présence améliore n'importe quelle situation instantanément",
+    "T'es le combo parfait : beauté intérieure + extérieure + personnalité",
+    "Tu rends le monde meilleur juste en existant dedans",
+    "T'es le genre de personne qui restaure la foi en l'humanité",
+    "Ton intelligence n'a d'égale que ta gentillesse c'est rare",
+    "T'es littéralement l'ami(e) que tout le monde rêve d'avoir",
+    "Tu as ce don naturel de rendre les autres heureux sans effort",
+    "T'es la preuve vivante que la perfection existe vraiment",
+    "Ta loyauté est plus solide qu'un diamant indestructible",
+    "T'es inspirant(e) sans même essayer de l'être c'est ouf",
+    "Ton cœur est grand comme l'océan Pacifique entier",
+    "T'es le genre de personne qui laisse une empreinte positive durable",
+    "Tu as cette aura spéciale que très peu de gens possèdent",
+    "T'es l'équilibre parfait entre force et douceur",
+    "Ton authenticité est rafraîchissante dans ce monde de faux-semblants",
+    "T'es un trésor que ceux qui te connaissent chérissent vraiment"
+];
+
+// 🔮 RÉPONSES 8BALL AVEC PERSONNALITÉ
+const ball8 = [
+    "Oui frr absolument aucun doute là-dessus ✅",
+    "C'est certain à 100% je te le garantis 💯",
+    "Sans l'ombre d'une hésitation OUI !",
+    "Les étoiles et le cosmos disent tous que oui 🔮",
+    "Très très probable genre presque sûr 🤔",
+    "Peut-être bien peut-être pas... c'est flou là 🤷",
+    "Concentre-toi mieux et redemande dans 5 min ⏳",
+    "Je peux pas te dire maintenant c'est compliqué 🤐",
+    "Franchement compte pas trop dessus mon gars 😬",
+    "Mes sources magiques disent clairement NON 🚫",
+    "Peu probable désolé de te décevoir 📉",
+    "Non franchement laisse tomber cette idée 😕",
+    "Absolument PAS n'y pense même plus ! ❌",
+    "Dans tes rêves peut-être mais pas IRL 💭",
+    "Demande plutôt à ta mère elle saura mieux 👩",
+    "Les signes sont mauvais vraiment très mauvais ⚠️",
+    "C'est possible mais vraiment improbable 📊",
+    "Réessaye quand tu seras plus mature mentalement 🧠",
+    "La boule magique a crashé en traitant ta question 💥",
+    "Réponse trop dangereuse à révéler maintenant 🚨"
+];
+
+// 💾 DONNÉES AVEC PERSONNAL
     
