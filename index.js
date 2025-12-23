@@ -758,5 +758,143 @@ async function startBot() {
             console.log('╚════════════════════════════════╝\n');
         }
     });
+sock.ev.on('messages.upsert', async ({ messages }) => {
+        try {
+            const m = messages[0];
+            if(!m.message || m.key.fromMe) return;
+            
+            const chat = m.key.remoteJid;
+            const txt = (m.message.conversation || m.message.extendedTextMessage?.text || '').trim();
+            const from = m.key.participant || m.key.remoteJid;
+            const isGrp = chat.endsWith('@g.us');
+            const name = m.pushName || from.split('@')[0];
+            const isAdmin = from === ADMIN;
+            
+            if(!data.stats[chat]) {
+                data.stats[chat] = {
+                    games: 0,
+                    actions: 0,
+                    verites: 0,
+                    lastPlayed: Date.now()
+                };
+            }
 
+            const reply = async (text, mentions) => {
+                return await sock.sendMessage(chat, {
+                    text,
+                    mentions: mentions || []
+                });
+            };
+
+            // 👋 MESSAGES D'ACCUEIL (yo, salut, cc, hello, etc.)
+            const greetings = ['yo', 'salut', 'cc', 'coucou', 'hello', 'hi', 'hey', 'slt'];
+            if(greetings.includes(txt.toLowerCase()) && txt.length < 10) {
+                return reply(
+                    `Yo ${name} ! 👋 Comment ça va ?\n\n` +
+                    `Moi c'est ton bot préféré pour jouer à Action ou Vérité ! 🎮🔥\n\n` +
+                    `Je suis là pour mettre l'ambiance avec :\n` +
+                    `• 80 défis par niveau 🎯\n` +
+                    `• 80 vérités qui font chaud ❓\n` +
+                    `• Des modes de jeu de ouf 👥\n` +
+                    `• Un système de points et classement 🏆\n\n` +
+                    `━━━━━━━━━━━━━━━━━\n\n` +
+                    `Tape *!menu* pour voir toutes mes commandes et commencer à jouer ! 😎\n\n` +
+                    `Let's go ! 🚀`
+                );
+            }
+
+            // 🚫 VÉRIFICATION BAN ET MAINTENANCE
+            if(!isAdmin) {
+                if(data.maintenance) {
+                    return reply('🔧 Le bot est en maintenance. Revenez plus tard !');
+                }
+                
+                if(data.bannedUsers && data.bannedUsers.includes(from)) {
+                    return reply('🚫 Vous êtes banni et ne pouvez pas utiliser le bot.');
+                }
+            }
+
+            // 👑 COMMANDES ADMIN
+            if(isAdmin) {
+                if(txt.startsWith('!annonce ')) {
+                    const message = txt.slice(9).trim();
+                    if(!message) {
+                        return reply('⚠️  Utilise : !annonce [ton message]');
+                    }
+                    
+                    return reply(
+                        `📢 *ANNONCE OFFICIELLE* 📢\n\n` +
+                        `${message}\n\n` +
+                        `_Message de l'administrateur_ 👑`
+                    );
+                }
+
+                if(txt.startsWith('!reset ')) {
+                    const mention = m.message.extendedTextMessage?.contextInfo?.mentionedJid?.[0];
+                    if(!mention) {
+                        return reply('⚠️  Mentionne quelqu\'un : !reset @user');
+                    }
+                    
+                    if(data.leaderboard[mention]) {
+                        delete data.leaderboard[mention];
+                        saveData();
+                        return reply(
+                            `✅ *Score réinitialisé !*\n\n` +
+                            `@${mention.split('@')[0]} repart à zéro 🔄`,
+                            [mention]
+                        );
+                    } else {
+                        return reply('⚠️  Cet utilisateur n\'a pas de score');
+                    }
+                }
+
+                if(txt === '!resetall') {
+                    data.leaderboard = {};
+                    data.stats = {};
+                    saveData();
+                    return reply(
+                        `🗑️  *RESET COMPLET !*\n\n` +
+                        `Tous les scores et stats ont été effacés 🔄\n\n` +
+                        `_Commande admin_`
+                    );
+                }
+
+                if(txt.startsWith('!addpoints ')) {
+                    const args = txt.slice(11).trim().split(' ');
+                    const mention = m.message.extendedTextMessage?.contextInfo?.mentionedJid?.[0];
+                    const points = parseInt(args[0]);
+                    
+                    if(!mention || isNaN(points)) {
+                        return reply('⚠️  Utilise : !addpoints [points] @user');
+                    }
+                    
+                    const userName = mention.split('@')[0];
+                    addPoints(mention, userName, points);
+                    
+                    return reply(
+                        `✅ *Points ajoutés !*\n\n` +
+                        `@${userName} : +${points} points 💰\n\n` +
+                        `_Commande admin_`,
+                        [mention]
+                    );
+                }
+
+                if(txt.startsWith('!removepoints ')) {
+                    const args = txt.slice(14).trim().split(' ');
+                    const mention = m.message.extendedTextMessage?.contextInfo?.mentionedJid?.[0];
+                    const points = parseInt(args[0]);
+                    
+                    if(!mention || isNaN(points)) {
+                        return reply('⚠️  Utilise : !removepoints [points] @user');
+                    }
+                    
+                    const userName = mention.split('@')[0];
+                    if(data.leaderboard[mention]) {
+                        data.leaderboard[mention].points -= points;
+                        if(data.leaderboard[mention].points < 0) {
+                            data.leaderboard[mention].points = 0;
+                        }
+                        saveData();
+                        
+                        
     
